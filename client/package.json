@@ -1,0 +1,20 @@
+{
+  "name": "gpz-booking-system",
+  "version": "1.0.0",
+  "description": "A system to manage the booking of training rooms and spaces at Global Platform Zambia",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agora-code-community/GPZ-Booking-System.git"
+  },
+  "author": "Agora Code Community",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agora-code-community/GPZ-Booking-System/issues"
+  },
+  "homepage": "https://github.com/agora-code-community/GPZ-Booking-System#readme"
+}
