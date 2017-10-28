@@ -19,12 +19,23 @@ import { SolarComponent } from './solar/solar.component';
 import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
+import { CalendarModule } from 'angular-calendar';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { DemoUtilsModule } from '../demo-utils/module';
 
 
 @NgModule({
   imports: [
     ThemeModule,
     AngularEchartsModule,
+    CommonModule,
+    FormsModule,
+    NgbModalModule.forRoot(),
+    CalendarModule.forRoot(),
+    DemoUtilsModule
   ],
   declarations: [
     DashboardComponent,
@@ -44,6 +55,8 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
     SolarComponent,
     TrafficComponent,
     TrafficChartComponent,
+    CalendarComponent,
   ],
+  exports: [CalendarComponent]
 })
 export class DashboardModule { }
