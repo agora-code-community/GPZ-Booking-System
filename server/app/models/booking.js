@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var BookingSchema = new mongoose.Schema({
+var BookingSchema = new Schema({
 
     booking_name: {
         type: String,
@@ -8,6 +9,10 @@ var BookingSchema = new mongoose.Schema({
     },
 
     organization: [{
+      name: {
+          type: String,
+          required: true
+      },
       email: {
           type: String,
           lowercase: true,
@@ -18,21 +23,11 @@ var BookingSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
         required: true
-      }
+      },
       description: {
           type: String,
       }
     }],
-
-    times: {
-      from: String,
-      to: String
-    },
-
-    duration:{
-      from: Date,
-      to: Date
-    },
 
     activity: [{
       activity_name: {
@@ -47,20 +42,12 @@ var BookingSchema = new mongoose.Schema({
       }
     }],
 
-    space: {
-      type: String
-    },
-
     number_of_participants: {
       type: Number
     },
 
-    materials: {
-      [String]
-    },
-
     dietary_requirements: {
-      [String]
+      type: [String]
     },
 
     approved: {
@@ -71,4 +58,39 @@ var BookingSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Booking', BookingSchema);
+var SpaceSchema = new Schema({
+
+    space_name: {
+        type: String,
+        required: true
+    },
+
+    times: {
+      from: String,
+      to: String
+    },
+
+    duration:{
+      from: String,
+      to: String
+    },
+
+    req_materials: {
+      type: [String]
+    },
+
+    //TODO: Reference booking model
+    booking: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Booking'
+    }]
+
+}, {
+    timestamps: true
+});
+
+var Booking = mongoose.model('Booking', BookingSchema);
+var Space = mongoose.model('Space', SpaceSchema);
+
+module.exports = Booking;
+module.exports = Space;

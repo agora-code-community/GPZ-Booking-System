@@ -7,7 +7,7 @@ var methodOverride = require('method-override');
 var cors = require('cors');
 
 var app = express();
-var port = 8080;
+var port = process.env.PORT || 8080;
 
 var databaseConfig = require('./config/database');
 var router = require('./app/routes');
@@ -21,6 +21,11 @@ app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
 app.use(methodOverride());
 app.use(cors());
+
+//
+app.get("/", function(req, res){
+  res.send("Invalid endpoint...");
+});
 
 //Start server
 app.listen(port, function(){
