@@ -65,14 +65,11 @@ var SpaceSchema = new Schema({
         required: true
     },
 
-    times: {
-      from: String,
-      to: String
-    },
-
     duration:{
-      from: String,
-      to: String
+      duration_from: String,
+      duration_to: String,
+      times_from: String,
+      times_to: String
     },
 
     req_materials: {
