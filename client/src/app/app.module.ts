@@ -4,29 +4,49 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ViewAllComponent } from './components/view-all/view-all.component';
+import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
+import { BookFormComponent } from './components/book-form/book-form.component';
 
 // routing links
 const appRoutes: Routes = [
 
-  { path: 'login', component: LoginComponent },
-  { path: '', component: DashboardComponent },
-  { path: 'view-booking', component: ViewAllComponent },
+  // Login routes goes here here
+  {
+    path: '',
+    component: LoginLayoutComponent,
+    children: [
+       { path: '', component: LoginComponent, pathMatch: 'full' }
+    ]
+  },
 
-];
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'view-booking', component: ViewAllComponent },
+      { path: 'add-booking', component: BookFormComponent },
+    ]
+  }
+]; // ends routes
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginLayoutComponent,
     NavbarComponent,
     LoginComponent,
     SidemenuComponent,
     DashboardComponent,
-    ViewAllComponent
+    ViewAllComponent,
+    AppLayoutComponent,
+    BookFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,179 @@
+<!-- Form to book a room or space -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Add a Booking</h1>
+</div>
+
+<!-- Tabbed form -->
+<ngb-tabset justify="justified">
+    <ngb-tab title="Event details">
+      <ng-template ngbTabContent>
+        <div class="border border-top-0 py-3 px-3">
+            <form >
+              <div class="col-md-8 mb-3">
+                <label for="evnt">Event Name</label>
+                <input type="text" class="form-control" id="evnt" placeholder="" value="" required>
+              </div>
+              <div class="col-md-8 mb-3">
+                <label for="descp">Event description</label>
+                <textarea class="form-control" rows="3" id="descp" required></textarea>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Save and Continue</button>
+              </div>
+            </form>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Booking details">
+      <ng-template ngbTabContent>
+        <div class="border border-top-0 py-3 px-3">
+          <form>
+            <div class="col-md-8 mb-3">
+              <label for="evnt">Event ID</label>
+              <input type="text" class="form-control" id="evnt" placeholder="event id" value="" readonly>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="firstName">Date of event (start)</label>
+                <input type="text" class="form-control" id="firstName" placeholder="datepicker" value="" required>
+              </div>
+              <div class="col-md-5 mb-3">
+                <label for="end-date">End date <span class="text-muted">(if event ends same day, leaveblank)</span></label>
+                <input type="text" class="form-control" id="end-date" placeholder="" value="" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="strt">Start Time</label>
+                <input type="email" class="form-control" id="strt" placeholder="10:00">
+              </div>
+        
+              <div class="col-md-5 mb-3">
+                <label for="end">End Time</label>
+                <input type="text" class="form-control" id="end" placeholder="12:00" required>
+              </div>
+            </div>
+            
+            <div class="col-md-5 mb-3">
+              <label for="country">Room/Space booked</label>
+              <select multiple class="custom-select d-block w-100" id="country" required>
+                <option value="">Choose...</option>
+                <option>Training room 1</option>
+                <option>Training room 2</option>
+                <option>Dinning area</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">Save and Continue</button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+<!-- <div class="card py-4 px-5">
+  <form novalidate id="evnt">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="firstName">Event Name</label>
+        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="lastName">Last name</label>
+        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          Valid last name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="username">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">@</span>
+        </div>
+        <input type="text" class="form-control" id="username" placeholder="Username" required>
+        <div class="invalid-feedback" style="width: 100%;">
+          Your username is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email">Email <span class="text-muted">(Optional)</span></label>
+      <input type="email" class="form-control" id="email" placeholder="you@example.com">
+      <div class="invalid-feedback">
+        Please enter a valid email address for shipping updates.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+      <div class="invalid-feedback">
+        Please enter your shipping address.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+      <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 mb-3">
+        <label for="country">Country</label>
+        <select class="custom-select d-block w-100" id="country" required>
+          <option value="">Choose...</option>
+          <option>United States</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid country.
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="state">State</label>
+        <select class="custom-select d-block w-100" id="state" required>
+          <option value="">Choose...</option>
+          <option>California</option>
+        </select>
+        <div class="invalid-feedback">
+          Please provide a valid state.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="zip">Zip</label>
+        <input type="text" class="form-control" id="zip" placeholder="" required>
+        <div class="invalid-feedback">
+          Zip code required.
+        </div>
+      </div>
+    </div>
+    <hr class="mb-4">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="same-address">
+      <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="save-info">
+      <label class="custom-control-label" for="save-info">Save this information for next time</label>
+    </div>
+    <hr class="mb-4">
+    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+  </form>
+
+  <form id="bookinDits">
+    <h1>Booking details here</h1>
+  </form>
+</div> -->
