@@ -30,3 +30,8 @@
 .form-signin .form-control:focus {
     z-index: 2;
 }
+
+.error {
+    color: red;
+    font-size: 0.7rem;
+}

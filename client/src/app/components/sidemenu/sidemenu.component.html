@@ -3,20 +3,20 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
-      <li class="nav-item" [routerLinkActive]="['active']" >
-        <a class="nav-link" [routerLink]="['/dashboard']">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
           <span data-feather="home"></span>
           Dashboard <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item"  routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/view-booking']">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/view-booking" routerLinkActive="active">
           <span data-feather="file"></span>
           View Bookings
         </a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/add-booking">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/add-booking" routerLinkActive="active">
           <span data-feather="shopping-cart"></span>
           New Booking
         </a>
@@ -39,7 +39,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">
           <span data-feather="file-text"></span>
-          Current month
+          Profile
         </a>
       </li>
     </ul>

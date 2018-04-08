@@ -4,69 +4,90 @@
 </div>
 
 <!-- Tabbed form -->
-<ngb-tabset justify="justified">
+<ngb-tabset #t="ngbTabset" justify="justified">
+  <!-- event tab -->
     <ngb-tab title="Event details">
       <ng-template ngbTabContent>
         <div class="border border-top-0 py-3 px-3">
-            <form >
+
+            <form (ngSubmit)="onEvntSubmit(fm.value)" #fm="ngForm">
               <div class="col-md-8 mb-3">
                 <label for="evnt">Event Name</label>
-                <input type="text" class="form-control" id="evnt" placeholder="" value="" required>
+                <input type="text" class="form-control" id="evnt" placeholder="" ngModel name="name" required>
               </div>
               <div class="col-md-8 mb-3">
                 <label for="descp">Event description</label>
-                <textarea class="form-control" rows="3" id="descp" required></textarea>
+                <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
               </div>
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">Save and Continue</button>
               </div>
             </form>
+
         </div>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Booking details">
+    <!-- details tab -->
+    <ngb-tab title="Booking details" id="details">
       <ng-template ngbTabContent>
         <div class="border border-top-0 py-3 px-3">
-          <form>
+
+          <form (ngSubmit)="onBookingSubmit(bookForm.value)" #bookForm="ngForm">
             <div class="col-md-8 mb-3">
-              <label for="evnt">Event ID</label>
-              <input type="text" class="form-control" id="evnt" placeholder="event id" value="" readonly>
+              <label for="evnt">Event ID:</label>
+              <input type="text" class="form-control" id="evnt" value="event id" ngModel name="evnt_id" readonly>
             </div>
 
             <div class="row">
               <div class="col-md-5 mb-3">
-                <label for="firstName">Date of event (start)</label>
-                <input type="text" class="form-control" id="firstName" placeholder="datepicker" value="" required>
+                <label for="strt-date">Date of event (start):</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                          name="strt_date" ngModel ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                    </button>
+                  </div>
+                </div>
               </div>
+
               <div class="col-md-5 mb-3">
-                <label for="end-date">End date <span class="text-muted">(if event ends same day, leaveblank)</span></label>
-                <input type="text" class="form-control" id="end-date" placeholder="" value="" required>
+                <label for="end-date">End date <small class="text-muted">(if event ends same day, leaveblank)</small>:</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                          name="end_date" ngModel ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-5 mb-3">
-                <label for="strt">Start Time</label>
-                <input type="email" class="form-control" id="strt" placeholder="10:00">
+                <label for="strt">Start Time:</label>
+                <ngb-timepicker ngModel name="strt_time"></ngb-timepicker>
+                <!-- <input type="email" class="form-control" id="strt" ngModel name="strt_time" placeholder="10:00"> -->
               </div>
         
               <div class="col-md-5 mb-3">
-                <label for="end">End Time</label>
-                <input type="text" class="form-control" id="end" placeholder="12:00" required>
+                <label for="end">End Time:</label>
+                <ngb-timepicker ngModel name="end_time"></ngb-timepicker>
+                <!-- <input type="text" class="form-control" id="end" placeholder="12:00" ngModel name="emd_time" required> -->
               </div>
             </div>
             
             <div class="col-md-5 mb-3">
-              <label for="country">Room/Space booked</label>
-              <select multiple class="custom-select d-block w-100" id="country" required>
+              <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
+              <select multiple class="custom-select d-block w-100" ngModel name="room" id="space" required>
                 <option value="">Choose...</option>
                 <option>Training room 1</option>
                 <option>Training room 2</option>
                 <option>Dinning area</option>
               </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
             </div>
 
             <div class="d-flex justify-content-end">

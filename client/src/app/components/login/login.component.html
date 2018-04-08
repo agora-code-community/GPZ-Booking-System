@@ -3,17 +3,28 @@
   <div class="mx-auto card login-card" style="width: 350px">
     <div class="card-body">
   
-      <form class="form-signin">
-        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="Logo" width="72" height="72">
+      <form class="form-signin" (ngSubmit)="onSubmit()" [formGroup]="logForm">
+        <img class="mb-4 mx-auto d-block" src="../../../assets/logo.png" alt="Logo" width="72" height="72">
   
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-  
+        <input type="email" id="inputEmail" class="form-control" formControlName="email" 
+          placeholder="Email address" required autofocus>
+        
+          <!-- error message -->
+        <small class="error" *ngIf="!logForm.controls.email.valid && (logForm.controls.email.dirty)" >
+          Invalid email, please enter valid email.
+        </small>
+          
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  
+        <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="Password" required>
+        
+        <!-- error message -->
+        <small class="error" *ngIf="!logForm.controls.password.valid && (logForm.controls.password.dirty)" >
+          Password must be 6 or more characters.
+        </small>
+
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
@@ -23,7 +34,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <a routerLink="/dashboard">Skip</a>
   
-        <p class="mt-5 mb-3 text-muted">Global Platform Zambia &copy; 2017-2018</p>
+        <p class="mt-5 mb-3 justify-content-center text-muted">Agora Code Community &copy;2018</p>
       </form>
     </div>
       
