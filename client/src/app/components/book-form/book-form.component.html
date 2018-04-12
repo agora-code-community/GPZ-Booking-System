@@ -28,7 +28,7 @@
       </ng-template>
     </ngb-tab>
     <!-- details tab -->
-    <ngb-tab title="Booking details" id="details">
+    <ngb-tab title="Booking details" [disabled]="step1" id="details">
       <ng-template ngbTabContent>
         <div class="border border-top-0 py-3 px-3">
 
@@ -83,10 +83,8 @@
             <div class="col-md-5 mb-3">
               <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
               <select multiple class="custom-select d-block w-100" ngModel name="room" id="space" required>
-                <option value="">Choose...</option>
-                <option>Training room 1</option>
-                <option>Training room 2</option>
-                <option>Dinning area</option>
+                <option *ngFor="let room of rooms">{{room.name}}</option>
+                <option>-- Choose --</option>
               </select>
             </div>
 

@@ -15,6 +15,9 @@ import { ViewAllComponent } from './components/view-all/view-all.component';
 import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
 import { BookFormComponent } from './components/book-form/book-form.component';
 
+import { EventServiceService } from './services/event-service.service';
+import { BookingServiceService } from './services/booking-service.service';
+
 // routing links
 const appRoutes: Routes = [
 
@@ -58,7 +61,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    EventServiceService,
+    BookingServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
