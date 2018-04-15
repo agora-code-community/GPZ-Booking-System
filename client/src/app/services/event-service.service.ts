@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class EventServiceService {
 
-  baseURL = 'http://127.0.0.1/api/events/';
+  baseURL = 'http://127.0.0.1:8000/api/events/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }
@@ -28,7 +28,7 @@ export class EventServiceService {
    * @param data the event input data
    */
   storeEvent(data) {
-    this.http.post(this.baseURL, data, {headers: this.contentHeaders});
+    return this.http.post(this.baseURL, data, {headers: this.contentHeaders});
   }
 
   /**
@@ -36,7 +36,7 @@ export class EventServiceService {
    * @param event_id event id to be updated
    * @param data the updated input data
    */
-  updateCustomer(event_id, data) {
+  updateEvent(event_id, data) {
     return this.http.put(this.baseURL + event_id, data, {headers: this.contentHeaders});
   }
 
@@ -44,7 +44,7 @@ export class EventServiceService {
    * Deletes an event
    * @param event_id the event's id
    */
-  deleteCustomer(event_id) {
+  deleteEvent(event_id) {
     return this.http.delete(this.baseURL + event_id);
   }
 

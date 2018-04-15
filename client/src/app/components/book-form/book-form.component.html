@@ -15,10 +15,10 @@
                 <label for="evnt">Event Name</label>
                 <input type="text" class="form-control" id="evnt" placeholder="" ngModel name="name" required>
               </div>
-              <div class="col-md-8 mb-3">
+              <!-- <div class="col-md-8 mb-3">
                 <label for="descp">Event description</label>
                 <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
-              </div>
+              </div> -->
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">Save and Continue</button>
               </div>
@@ -28,14 +28,15 @@
       </ng-template>
     </ngb-tab>
     <!-- details tab -->
-    <ngb-tab title="Booking details" [disabled]="step1" id="details">
+    <ngb-tab title="Booking details" id="details">
       <ng-template ngbTabContent>
         <div class="border border-top-0 py-3 px-3">
 
           <form (ngSubmit)="onBookingSubmit(bookForm.value)" #bookForm="ngForm">
-            <div class="col-md-8 mb-3">
+            <h6 *ngIf="!event">Please create an event before filling in this form</h6>
+            <div *ngIf="event" class="col-md-8 mb-3">
               <label for="evnt">Event ID:</label>
-              <input type="text" class="form-control" id="evnt" value="event id" ngModel name="evnt_id" readonly>
+              <input type="text" class="form-control" id="evnt" name="event_id" [(ngModel)]="event.id" required readonly>
             </div>
 
             <div class="row">
@@ -43,7 +44,7 @@
                 <label for="strt-date">Date of event (start):</label>
                 <div class="input-group">
                   <input class="form-control" placeholder="yyyy-mm-dd"
-                          name="strt_date" ngModel ngbDatepicker #d="ngbDatepicker">
+                          name="start_date" ngModel ngbDatepicker #d="ngbDatepicker" required>
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
@@ -53,12 +54,12 @@
               </div>
 
               <div class="col-md-5 mb-3">
-                <label for="end-date">End date <small class="text-muted">(if event ends same day, leaveblank)</small>:</label>
+                <label for="end-date">End date:</label>
                 <div class="input-group">
                   <input class="form-control" placeholder="yyyy-mm-dd"
-                          name="end_date" ngModel ngbDatepicker #d="ngbDatepicker">
+                          name="end_date" ngModel ngbDatepicker #e="ngbDatepicker" required>
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
                       <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                     </button>
                   </div>
@@ -69,7 +70,7 @@
             <div class="row">
               <div class="col-md-5 mb-3">
                 <label for="strt">Start Time:</label>
-                <ngb-timepicker ngModel name="strt_time"></ngb-timepicker>
+                <ngb-timepicker ngModel name="start_time"></ngb-timepicker>
                 <!-- <input type="email" class="form-control" id="strt" ngModel name="strt_time" placeholder="10:00"> -->
               </div>
         
@@ -80,16 +81,16 @@
               </div>
             </div>
             
-            <div class="col-md-5 mb-3">
+            <!-- <div class="col-md-5 mb-3">
               <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
               <select multiple class="custom-select d-block w-100" ngModel name="room" id="space" required>
                 <option *ngFor="let room of rooms">{{room.name}}</option>
                 <option>-- Choose --</option>
               </select>
-            </div>
+            </div> -->
 
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary">Save and Continue</button>
+              <button type="submit" class="btn btn-primary">Add Booking</button>
             </div>
           </form>
         </div>
@@ -97,102 +98,3 @@
     </ngb-tab>
   </ngb-tabset>
 
-<!-- <div class="card py-4 px-5">
-  <form novalidate id="evnt">
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label for="firstName">Event Name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-        <div class="invalid-feedback">
-          Valid first name is required.
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label for="lastName">Last name</label>
-        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-        <div class="invalid-feedback">
-          Valid last name is required.
-        </div>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="username">Username</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">@</span>
-        </div>
-        <input type="text" class="form-control" id="username" placeholder="Username" required>
-        <div class="invalid-feedback" style="width: 100%;">
-          Your username is required.
-        </div>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="email">Email <span class="text-muted">(Optional)</span></label>
-      <input type="email" class="form-control" id="email" placeholder="you@example.com">
-      <div class="invalid-feedback">
-        Please enter a valid email address for shipping updates.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="address">Address</label>
-      <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-      <div class="invalid-feedback">
-        Please enter your shipping address.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-      <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-    </div>
-
-    <div class="row">
-      <div class="col-md-5 mb-3">
-        <label for="country">Country</label>
-        <select class="custom-select d-block w-100" id="country" required>
-          <option value="">Choose...</option>
-          <option>United States</option>
-        </select>
-        <div class="invalid-feedback">
-          Please select a valid country.
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="state">State</label>
-        <select class="custom-select d-block w-100" id="state" required>
-          <option value="">Choose...</option>
-          <option>California</option>
-        </select>
-        <div class="invalid-feedback">
-          Please provide a valid state.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="zip">Zip</label>
-        <input type="text" class="form-control" id="zip" placeholder="" required>
-        <div class="invalid-feedback">
-          Zip code required.
-        </div>
-      </div>
-    </div>
-    <hr class="mb-4">
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="same-address">
-      <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="save-info">
-      <label class="custom-control-label" for="save-info">Save this information for next time</label>
-    </div>
-    <hr class="mb-4">
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-  </form>
-
-  <form id="bookinDits">
-    <h1>Booking details here</h1>
-  </form>
-</div> -->

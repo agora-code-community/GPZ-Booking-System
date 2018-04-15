@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class BookingServiceService {
 
-  baseURL = 'http:127.0.0.1:8000/api/booking/';
+  baseURL = 'http://127.0.0.1:8000/api/bookings/';
   contentHeaders = new HttpHeaders({
     'Content-Type': 'application/josn',
    // 'X-Requested-With': 'XMLHttpRequest'
@@ -22,6 +22,7 @@ export class BookingServiceService {
    * @param data the booking input data
    */
   storeBooking(data) {
+    this.contentHeaders = this.contentHeaders.append('X-Requested-With', 'XMLHttpRequest');
     return this.http.post(this.baseURL, data, {headers: this.contentHeaders});
   }
 

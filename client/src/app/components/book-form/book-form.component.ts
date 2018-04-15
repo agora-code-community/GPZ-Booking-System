@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { BookingServiceService } from './../../services/booking-service.service';
+import { EventServiceService } from './../../services/event-service.service';
 
 @Component({
   selector: 'app-book-form',
@@ -11,10 +12,14 @@ export class BookFormComponent implements OnInit {
 
   @ViewChild('t') t;  // selects the component eith the variale #t
   rooms: any;  // store the rooms from the db
-  event_id: string; // the id of the event thats just been created
-  step1 = true;  // if the event form has been submitted
+  event: any; // full object of created event
+    formattedDate: string;
+    formattedTime: string;
 
-  constructor(private bservice: BookingServiceService) { }
+  constructor(
+    private bservice: BookingServiceService,
+    private evntService: EventServiceService
+  ) { }
 
   ngOnInit() {
     this.initRooms();
@@ -28,15 +33,43 @@ export class BookFormComponent implements OnInit {
   }
 
   // Event form submitted
-  onEvntSubmit(data) {
-    console.log(data);
-    this.step1 = false;
+  onEvntSubmit(evnt) {
+    // console.log(evnt);
+    this.evntService.storeEvent(evnt).subscribe(data => {
+      this.event = data['event'];
+    });
+
     this.t.select('details'); // selects the details tab after the posting
   }
 
   // booking details form submitted
   onBookingSubmit(data) {
+    // format dates for object to string
+    data.start_date = this.formatDate(data.start_date);
+    data.end_date = this.formatDate(data.end_date);
+
+    // formatted times
+      data.start_time = this.formatTime(data.start_time);
+      data.end_time = this.formatTime(data.end_time);
+
+      // sends to the api
+      this.bservice.storeBooking(data).subscribe(booking => {
+        if(booking) console.log("Added successfully");
+      });
+
     console.log(data);
+  }
+
+  formatDate(date):string {
+    let year = date.year;
+    let month = date.month;
+    let day = date.day;
+
+    return  this.formattedDate = year + '-' + month + '-' + day; // date yyyy-mm-dd
+  }
+
+  formatTime(time):string {
+    return this.formattedTime = time.hour + ':' + time.minute + ':' + time.second;
   }
 
 }
