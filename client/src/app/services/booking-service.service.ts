@@ -4,17 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class BookingServiceService {
 
-  baseURL = 'http://127.0.0.1:8000/api/bookings/';
-  contentHeaders = new HttpHeaders({
-    'Content-Type': 'application/josn',
-   // 'X-Requested-With': 'XMLHttpRequest'
-  });
+  // variables
+  baseURL = 'http://127.0.0.1:8080/api/bookings/';
+  contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }
 
   // gets the rooms from the db
   getRooms() {
-    return this.http.get('http://127.0.0.1:8000/api/rooms/all');
+    return this.http.get('http://127.0.0.1:8080/api/rooms/all');
   }
 
   /**
@@ -22,7 +20,6 @@ export class BookingServiceService {
    * @param data the booking input data
    */
   storeBooking(data) {
-    this.contentHeaders = this.contentHeaders.append('X-Requested-With', 'XMLHttpRequest');
     return this.http.post(this.baseURL, data, {headers: this.contentHeaders});
   }
 

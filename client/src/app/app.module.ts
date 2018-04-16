@@ -17,10 +17,12 @@ import { BookFormComponent } from './components/book-form/book-form.component';
 
 import { EventServiceService } from './services/event-service.service';
 import { BookingServiceService } from './services/booking-service.service';
+import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
 
 // routing links
 const appRoutes: Routes = [
 
+    // todo: move routing links to a separate file for cleaner look
   // Login routes goes here here
   {
     path: '',
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'view-booking', component: ViewAllComponent },
       { path: 'add-booking', component: BookFormComponent },
+        { path: 'edit-event/:id', component: EditBookingComponent },
     ]
   }
 ]; // ends routes
@@ -51,7 +54,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     ViewAllComponent,
     AppLayoutComponent,
-    BookFormComponent
+    BookFormComponent,
+    EditBookingComponent
   ],
   imports: [
     BrowserModule,

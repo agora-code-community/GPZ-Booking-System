@@ -55,6 +55,7 @@ export class BookFormComponent implements OnInit {
       // sends to the api
       this.bservice.storeBooking(data).subscribe(booking => {
         if(booking) console.log("Added successfully");
+        else console.log('Error occurred');
       });
 
     console.log(data);
