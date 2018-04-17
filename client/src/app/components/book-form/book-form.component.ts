@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { BookingServiceService } from './../../services/booking-service.service';
 import { EventServiceService } from './../../services/event-service.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-book-form',
@@ -18,7 +18,8 @@ export class BookFormComponent implements OnInit {
 
   constructor(
     private bservice: BookingServiceService,
-    private evntService: EventServiceService
+    private evntService: EventServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -54,8 +55,11 @@ export class BookFormComponent implements OnInit {
 
       // sends to the api
       this.bservice.storeBooking(data).subscribe(booking => {
-        if(booking) console.log("Added successfully");
-        else console.log('Error occurred');
+        // on success
+        if(booking) {
+            console.log("Added successfully");
+            this.router.navigateByUrl('/view-booking');
+        } else { console.log('Error occurred'); }
       });
 
     console.log(data);

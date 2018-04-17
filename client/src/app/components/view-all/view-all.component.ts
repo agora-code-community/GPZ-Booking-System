@@ -31,9 +31,11 @@ export class ViewAllComponent implements OnInit {
     this.eventServ.getAllEvents().subscribe(data => this.events = data['events']);
   }
 
+  // not yet implemented in API
   deleteEvnt(id) {
     this.eventServ.deleteEvent(id).subscribe(data => {
       if (data) console.log(data); // prints to the console
+        // todo: update view on delete
     })
   }
 

@@ -19,7 +19,7 @@ export class EventServiceService {
   /**
    * Get particalur event
    */
-  getEvent(id) {
+  getAnEvent(id) {
     return this.http.get(this.baseURL + id);
   }
 
