@@ -1,36 +1,74 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { CoreModule } from './@core/core.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { ThemeModule } from './@theme/theme.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ViewAllComponent } from './components/view-all/view-all.component';
+import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
+import { BookFormComponent } from './components/book-form/book-form.component';
+
+import { EventServiceService } from './services/event-service.service';
+import { BookingServiceService } from './services/booking-service.service';
+import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
+
+// routing links
+const appRoutes: Routes = [
+
+    // todo: move routing links to a separate file for cleaner look
+  // Login routes goes here here
+  {
+    path: '',
+    component: LoginLayoutComponent,
+    children: [
+       { path: '', component: LoginComponent, pathMatch: 'full' }
+    ]
+  },
+
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'view-booking', component: ViewAllComponent },
+      { path: 'add-booking', component: BookFormComponent },
+        { path: 'edit-event/:id', component: EditBookingComponent },
+    ]
+  }
+]; // ends routes
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    LoginLayoutComponent,
+    NavbarComponent,
+    LoginComponent,
+    SidemenuComponent,
+    DashboardComponent,
+    ViewAllComponent,
+    AppLayoutComponent,
+    BookFormComponent,
+    EditBookingComponent
+  ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    HttpModule,
-    AppRoutingModule,
-
-    NgbModule.forRoot(),
-    ThemeModule.forRoot(),
-    CoreModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    NgbModule.forRoot()
   ],
-  bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
+    EventServiceService,
+    BookingServiceService
   ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

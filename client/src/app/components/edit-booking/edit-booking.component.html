@@ -1,0 +1,32 @@
+<!-- Form to book a room or space -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Edit Event Booking</h1>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h4>Editing <small>Event name</small></h4>
+        <hr>
+        <!-- if $evnt is retrieved from db, show form -->
+        <div *ngIf="evnt">
+          <form (ngSubmit)="onSubmit(fm.value)" #fm="ngForm">
+            <div class="col-md-8 mb-3">
+              <label for="event">Event Name</label>
+              <input type="text" class="form-control" id="event" name="name" [(ngModel)]="evnt.name" required>
+            </div>
+            <!-- <div class="col-md-8 mb-3">
+              <label for="descp">Event description</label>
+              <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
+            </div> -->
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

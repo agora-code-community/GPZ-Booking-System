@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">All Bookings</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group mr-2">
+      <button class="btn btn-sm btn-outline-secondary">Table</button>
+      <button class="btn btn-sm btn-outline-secondary">Calendar</button>
+    </div>
+    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+      <span data-feather="calendar"></span>
+      This Month
+    </button>
+  </div>
+</div>
+
+<h5>All bookings</h5>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Event name</th>
+        <th>Room/ Space</th>
+        <th>Dates</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let evnt of events">
+        <td>{{ evnt.id }}</td>
+        <td>
+          <!-- show details button -->
+          <button type="button" (click)="open(dits)" class="btn btn-link">{{ evnt.name }}</button>
+
+          <!-- details modal -->
+          <ng-template #dits let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h5 class="modal-title">Event details</h5>
+              <button type="button" class="close" aria-label="close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5>{{ evnt.name }} <small>booked by: Organisation</small></h5>
+              <ul>
+                <li>Start date - end date</li>
+                <li>Start time - end time</li>
+                <li>Rooms booked</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-md btn-primary" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+
+        </td>
+        <td> Room comes here </td>
+        <td>Dates</td>
+        <td>
+          <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-sm btn-primary"> Edit</a> |
+          <button type="button" (click)="open(content)" class="btn btn-sm btn-danger">Delete</button>
+
+          <!-- delete modal -->
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h5 class="modal-title">Confirm Deletion</h5>
+              <button type="button" class="close" aria-label="close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this event({{ evnt.id }}) permanently?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-md btn-secondary" (click)="c('Close click')">Cancel</button>
+              <button type="button"  class="btn btn-md btn-danger" (click)="deleteEvnt(evnt.id)">OK</button>
+            </div>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
