@@ -78,6 +78,19 @@ return [
             'prefix' => '',
         ],
 
+        'pgsql_codeship' => [
+            'driver' => 'pgsql',
+            'host' => 'localhost',
+            'port' => '5432',
+            'database' => 'development',
+            'username' => env('PGUSER'),
+            'password' => env('PGPASSWORD'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
     ],
 
     /*
