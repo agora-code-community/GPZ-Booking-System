@@ -1,1 +1,0 @@
-web: sh -c 'cd ./server/ && exec vendor/bin/heroku-php-nginx -C nginx_app.conf public/'
