@@ -1,0 +1,30 @@
+<!-- Main app page layout -->
+
+<!-- loader -->
+<div class="wrapper">
+  <div class="loader-bg">
+    <div class="loader-bar">
+  </div>
+</div>
+
+<!-- navbar -->
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- side menu -->
+    <app-sidemenu></app-sidemenu>
+
+    <!-- content area -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- footer -->
+  <!-- <footer class="footer">
+    <div class="container text-center">
+      <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+  </footer> -->
+</div>

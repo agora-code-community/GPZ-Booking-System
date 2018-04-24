@@ -1,0 +1,100 @@
+<!-- Form to book a room or space -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Add a Booking</h1>
+</div>
+
+<!-- Tabbed form -->
+<ngb-tabset #t="ngbTabset" justify="justified">
+  <!-- event tab -->
+    <ngb-tab title="Event details">
+      <ng-template ngbTabContent>
+        <div class="border border-top-0 py-3 px-3">
+
+            <form (ngSubmit)="onEvntSubmit(fm.value)" #fm="ngForm">
+              <div class="col-md-8 mb-3">
+                <label for="evnt">Event Name</label>
+                <input type="text" class="form-control" id="evnt" placeholder="" ngModel name="name" required>
+              </div>
+              <!-- <div class="col-md-8 mb-3">
+                <label for="descp">Event description</label>
+                <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
+              </div> -->
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Save and Continue</button>
+              </div>
+            </form>
+
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <!-- details tab -->
+    <ngb-tab title="Booking details" id="details">
+      <ng-template ngbTabContent>
+        <div class="border border-top-0 py-3 px-3">
+
+          <form (ngSubmit)="onBookingSubmit(bookForm.value)" #bookForm="ngForm">
+            <h6 *ngIf="!event">Please create an event before filling in this form</h6>
+            <div *ngIf="event" class="col-md-8 mb-3">
+              <label for="evnt">Event ID:</label>
+              <input type="text" class="form-control" id="evnt" name="event_id" [(ngModel)]="event.id" required readonly>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="strt-date">Date of event (start):</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                          name="start_date" ngModel ngbDatepicker #d="ngbDatepicker" required>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-5 mb-3">
+                <label for="end-date">End date:</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                          name="end_date" ngModel ngbDatepicker #e="ngbDatepicker" required>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
+                      <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="strt">Start Time:</label>
+                <ngb-timepicker ngModel name="start_time"></ngb-timepicker>
+                <!-- <input type="email" class="form-control" id="strt" ngModel name="strt_time" placeholder="10:00"> -->
+              </div>
+        
+              <div class="col-md-5 mb-3">
+                <label for="end">End Time:</label>
+                <ngb-timepicker ngModel name="end_time"></ngb-timepicker>
+                <!-- <input type="text" class="form-control" id="end" placeholder="12:00" ngModel name="emd_time" required> -->
+              </div>
+            </div>
+            
+            <!-- <div class="col-md-5 mb-3">
+              <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
+              <select multiple class="custom-select d-block w-100" ngModel name="room" id="space" required>
+                <option *ngFor="let room of rooms">{{room.name}}</option>
+                <option>-- Choose --</option>
+              </select>
+            </div> -->
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">Add Booking</button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+

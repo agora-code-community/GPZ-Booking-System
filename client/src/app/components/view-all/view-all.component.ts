@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EventServiceService } from "../../services/event-service.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-view-all',
@@ -7,9 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewAllComponent implements OnInit {
 
-  constructor() { }
+  events: any; // to hold all the events from the db
+
+  constructor(
+      private eventServ: EventServiceService,
+      private modalService: NgbModal
+      ) { }
 
   ngOnInit() {
+    this.getEvents(); // gets events
+  }
+
+  open(content) {
+    this.modalService.open(content);
+  }
+
+    /**
+     * Gets the stored events from the db
+     */
+  getEvents() {
+    this.eventServ.getAllEvents().subscribe(data => this.events = data['events']);
+  }
+
+  // not yet implemented in API
+  deleteEvnt(id) {
+    this.eventServ.deleteEvent(id).subscribe(data => {
+      if (data) console.log(data); // prints to the console
+        // todo: update view on delete
+    })
   }
 
 }
