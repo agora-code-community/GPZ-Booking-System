@@ -60,7 +60,8 @@ class EventController extends Controller
     public function select(Event $event)
     {
         $response = [
-            'event' => $event
+            'event' => $event,
+            'bookings' => $event->bookings()->get()
         ];
 
         return response($response, 200);
