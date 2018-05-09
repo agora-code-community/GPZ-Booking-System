@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class BookingServiceService {
 
   // variables
-  baseURL = 'http://127.0.0.1:8080/api/bookings/';
+  baseURL = 'http://127.0.0.1:8000/api/bookings/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }

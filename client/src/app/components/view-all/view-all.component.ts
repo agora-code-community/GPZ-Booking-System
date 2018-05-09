@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventServiceService } from "../../services/event-service.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { EventServiceService } from '../../services/event-service.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-all',
@@ -10,6 +10,8 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 export class ViewAllComponent implements OnInit {
 
   events: any; // to hold all the events from the db
+  booking: any;
+  result: any;
 
   constructor(
       private eventServ: EventServiceService,
@@ -20,23 +22,32 @@ export class ViewAllComponent implements OnInit {
     this.getEvents(); // gets events
   }
 
-  open(content) {
-    this.modalService.open(content);
+  /**
+   * Gets the stored events from the db
+   */
+  getEvents() {
+    this.eventServ.getAllEvents().subscribe(data => {
+      this.events = data['events'];
+    });
   }
 
-    /**
-     * Gets the stored events from the db
-     */
-  getEvents() {
-    this.eventServ.getAllEvents().subscribe(data => this.events = data['events']);
+  /**
+   * Gets a single event
+   * @param id of the selected event
+   */
+  getEvent(id) {
+    this.eventServ.getAnEvent(id).subscribe(data => {
+      this.result = data['event'];
+      this.booking = data['booking'];
+    });
   }
 
   // not yet implemented in API
   deleteEvnt(id) {
     this.eventServ.deleteEvent(id).subscribe(data => {
-      if (data) console.log(data); // prints to the console
-        // todo: update view on delete
-    })
+      if (data) { console.log(data); } // prints to the console
+        // TODO: update view on delete
+    });
   }
 
 }
