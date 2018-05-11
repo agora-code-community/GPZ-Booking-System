@@ -1,4 +1,4 @@
-
 .bg {
-    background: linear-gradient(#614385, #516395);
+    background: url("/assets/blue-gradient.jpg") no-repeat;
+    background-size: cover;
 }
