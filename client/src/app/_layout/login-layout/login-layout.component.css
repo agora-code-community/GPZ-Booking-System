@@ -1,4 +1,5 @@
 
-div {
-    background: linear-gradient(#614385, #516395);
+.bg {
+    background-image: url(/assets/blue-login.jpg);
+    height: 100vh;
 }
