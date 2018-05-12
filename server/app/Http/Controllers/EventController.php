@@ -61,7 +61,7 @@ class EventController extends Controller
     {
         $response = [
             'event' => $event,
-            'booking' => $event->bookings()->get()
+            'bookings' => $event->bookings()->get()
         ];
 
         return response($response, 200);

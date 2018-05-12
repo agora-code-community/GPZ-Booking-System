@@ -1,13 +1,31 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-  <h1 class="h2">Event Details</h1>
-  <div class="btn-toolbar mb-2 mb-md-0">
-    <div class="btn-group mr-2">
-      <button class="btn btn-sm btn-outline-secondary">Edit</button>
-      <button class="btn btn-sm btn-outline-primary">Back</button>
-    </div>
-  </div>
+  <h1 class="h2">Details</h1>
 </div>
 
 <h5>Event name</h5>
 <div class="loader"></div>
 <!-- TODO: add card that displays event and booking info here -->
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">{{ evnt.name }}</div>
+      <div class="card-body">
+        <ul *ngFor="let booking of bookings">
+          <li>
+            Start time: {{ booking.start_time }} - End time: {{ booking.end_time }}
+          </li>
+          <li>
+            Start date: {{ booking.start_date }} - End data: {{ booking.end_date }}
+          </li>
+          <li>
+            Room/Space booked: xxxxxxx
+          </li>
+        </ul>
+        <div class="btn-group mr-2">
+          <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-md btn-outline-secondary">Edit</a>
+          <a routerLink="/view-booking" class="btn btn-md btn-outline-primary">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -31,17 +31,6 @@ export class ViewAllComponent implements OnInit {
     });
   }
 
-  /**
-   * Gets a single event
-   * @param id of the selected event
-   */
-  getEvent(id) {
-    this.eventServ.getAnEvent(id).subscribe(data => {
-      this.result = data['event'];
-      this.booking = data['booking'];
-    });
-  }
-
   // not yet implemented in API
   deleteEvnt(id) {
     this.eventServ.deleteEvent(id).subscribe(data => {
