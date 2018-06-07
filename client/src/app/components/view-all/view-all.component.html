@@ -27,7 +27,8 @@
 
     <tbody>
       <!-- show loader while retrieving from db -->
-      <div *ngIf="!events" class="loader"></div>
+      <!-- TODO: center the spinner -->
+      <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
       <tr *ngFor="let evnt of events">
         <td>{{ evnt.id }}</td>

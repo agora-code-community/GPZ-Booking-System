@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventServiceService } from "../../services/event-service.service";
-import { Router, Params ,ActivatedRoute } from "@angular/router";
+import { EventServiceService } from '../../services/event-service.service';
+import { Router, Params ,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-booking',
@@ -11,6 +11,7 @@ export class EditBookingComponent implements OnInit {
 
   // variables
   evnt: any; // to hold the retrieved end
+  bookings: any; // to hold the events booking
   id: string; // the event's ID
 
   constructor(
@@ -32,19 +33,23 @@ export class EditBookingComponent implements OnInit {
      * @param id the event ID to be retrieved
      */
   getEvent(id) {
-    this.evntService.getAnEvent(id).subscribe(data => this.evnt = data['event']);
+    this.evntService.getAnEvent(id).subscribe(data => {
+      this.evnt = data['event'];
+      this.bookings = data['bookings'];
+    });
   }
 
   onSubmit(data) {
     // send to API
-      this.evntService.updateEvent(this.id, data).subscribe(data => {
-        if(data) {
-            console.log('UPDATED SUCCESSFULLY'); // TODO: change to alert message
-          this.router.navigateByUrl('/view-booking');
-        } else {
-          console.log('ERROR');
-        }
-      });
+    console.log(data);
+      // this.evntService.updateEvent(this.id, data).subscribe(data => {
+      //   if (data) {
+      //       console.log('UPDATED SUCCESSFULLY'); // TODO: change to alert message
+      //     this.router.navigateByUrl('/view-booking');
+      //   } else {
+      //     console.log('ERROR');
+      //   }
+      // });
   }
 
 }

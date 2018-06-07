@@ -20,6 +20,7 @@ import { EventServiceService } from './services/event-service.service';
 import { BookingServiceService } from './services/booking-service.service';
 import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
 import { ViewDetailsComponent } from './components/view-details/view-details.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     AppLayoutComponent,
     BookFormComponent,
     EditBookingComponent,
-    ViewDetailsComponent
+    ViewDetailsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

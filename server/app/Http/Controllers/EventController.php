@@ -61,7 +61,7 @@ class EventController extends Controller
     {
         $response = [
             'event' => $event,
-            'bookings' => $event->bookings()->get()
+            'bookings' => $event->bookings()->get()  // to get only 1 add ==> orderBy('created_at', 'desc')->first()
         ];
 
         return response($response, 200);
