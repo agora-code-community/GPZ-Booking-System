@@ -41,4 +41,44 @@ class BookingController extends Controller
 
         return response()->json($response, 201);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param Booking $booking
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function update(Request $request, Booking $booking)
+    {
+        if(!$booking)
+            throw new NotFoundHttpException;
+
+        $booking->update($request->all());
+        $response = [
+            'booking' => $booking
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Booking $booking
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     * @internal param int $id
+     */
+    public function destroy(Booking $booking)
+    {
+        if(!$booking)
+            throw new NotFoundHttpException;
+
+        if($booking->delete())
+            return response()->json(null, 204);
+        else
+            return response()->json(['error' => 'Could not delete booking'], 500);
+    }
 }
