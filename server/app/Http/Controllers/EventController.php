@@ -87,4 +87,23 @@ class EventController extends Controller
 
         return response()->json($response, 200);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Event $event
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     * @internal param int $id
+     */
+    public function destroy(Event $event)
+    {
+        if(!$event)
+            throw new NotFoundHttpException;
+
+        if($event->delete())
+            return response()->json(null, 204);
+        else
+            return response()->json(['error' => 'Could not delete event'], 500);
+    }
 }
