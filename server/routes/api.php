@@ -26,8 +26,11 @@ Route::group(['prefix' => 'events'], function () {
     Route::get('{event}', 'EventController@select');
     Route::post('', 'EventController@store');
     Route::put('{event}', 'EventController@update');
+    Route::delete('{event}', 'EventController@destroy');
 });
 
 Route::group(['prefix' => 'bookings'], function () {
     Route::post('', 'BookingController@store');
+    Route::put('{booking}', 'BookingController@update');
+    Route::delete('{booking}', 'BookingController@destroy');
 });
