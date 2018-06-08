@@ -19,24 +19,21 @@
       <tr>
         <th>#</th>
         <th>Event name</th>
-        <th>Room/ Space</th>
         <th>Dates</th>
         <th>Actions</th>
       </tr>
     </thead>
 
-    <tbody>
-      <!-- show loader while retrieving from db -->
-      <!-- TODO: center the spinner -->
-      <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
 
+    <tbody>
+      
       <tr *ngFor="let evnt of events">
         <td>{{ evnt.id }}</td>
         <td>
           <!-- link to event details -->
           <a routerLink="/view-details/{{ evnt.id }}">{{ evnt.name }}</a>
         </td>
-        <td> Room comes here </td>
         <td>Dates</td>
         <td>
           <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-sm btn-primary"> Edit</a> |

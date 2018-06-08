@@ -3,30 +3,146 @@
 </div>
 
 <h5>Event name</h5>
-<div class="loader"></div>
+
 <!-- TODO: add card that displays event and booking info here -->
 <div class="row">
   <div class="col">
 
     <div class="card">
       <div class="card-header">{{ evnt.name }}</div>
+      <!-- shows the booking associated to this event in cards -->
       <div class="card-body">
-        <ul *ngFor="let booking of bookings">
-          <li>
-            Start time: {{ booking.start_time }} - End time: {{ booking.end_time }}
-          </li>
-          <li>
-            Start date: {{ booking.start_date }} - End data: {{ booking.end_date }}
-          </li>
-          <li>
-            Room/Space booked: xxxxxxx
-          </li>
-        </ul>
-        <div class="btn-group mr-2">
-          <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-md btn-outline-secondary">Edit</a>
-          <a routerLink="/view-booking" class="btn btn-md btn-outline-primary">Back</a>
+        <!-- row 1 containing event specific details -->
+        <div class="row">
+          <div class="col">
+            <label class="col-sm col-md-3">Description :</label>
+            <p class="col-sm col-md-9">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis rem aut autem, ipsa odio incidunt necessitatibus, 
+              ratione veritatis quod cumque optio recusandae architecto quo ab! Nulla eveniet doloremque culpa unde.
+            </p>
+
+            <!-- control buttons -->
+            <div class="d-flex justify-content-end">
+              <div class="btn-group">
+                <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-md btn-outline-primary">Edit</a>
+              </div>
+            </div>
+
+            <!-- divider situation like this -->
+            <hr>
+          </div> <!-- ./col -->
+        </div>
+
+        <!-- Row 2 containing booking cards -->
+        <p class="note">These are the bookings created under this event.</p>
+        <div class="row">
+          <div class="col-6" *ngFor="let booking of bookings">
+
+            <!-- Edit Modal & delete Modal section for specific bokinng -->
+            <!-- TODO: Add data from database into form -->
+            <!-- Delete modal for event -->     
+            <ng-template #editBooking let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Edit Booking</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="bookingForm">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="strt-date">Date of event (start):</label>
+                      <div class="input-group">
+                        <input class="form-control" formControlName="start_date" ngbDatepicker #d="ngbDatepicker" required>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                            <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="col-md-6 mb-3">
+                      <label for="end-date">End date:</label>
+                      <div class="input-group">
+                        <input class="form-control" formControlName="end_date" ngbDatepicker #e="ngbDatepicker" required>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
+                            <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="strt">Start Time:</label>
+                      <ngb-timepicker formControlName="start_time"></ngb-timepicker>
+                      <!-- <input type="email" class="form-control" id="strt" ngModel name="strt_time" placeholder="10:00"> -->
+                    </div>
+              
+                    <div class="col-md-6 mb-3">
+                      <label for="end">End Time:</label>
+                      <ngb-timepicker formControlName="end_time"></ngb-timepicker>
+                      <!-- <input type="text" class="form-control" id="end" placeholder="12:00" ngModel name="emd_time" required> -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+              </div>
+            </ng-template>
+            <!-- ./delete modal code -->
+
+            <!-- Delete modal for event -->     
+        <ng-template #deleteBk let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Confirm Deletion</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this booking forever?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning">Yes</button>
+              <button type="button" class="btn btn-light" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+    <!-- ./delete modal code -->
+            <!-- ./ Modal section -->
+
+            <!-- Inner bookings card -->
+            <div class="card z-2">
+              <div class="card-header">
+                Booking 
+                <div class="top-right">
+                  <button type="button" class="close" aria-label="Close" (click)="open(deleteBk)">
+                    <span class="danger" aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <dl>
+                  <dd> <label>Start time:</label> {{ booking.start_time }}</dd>
+                  <dd> <label>End time:</label> {{ booking.end_time }}</dd>
+                  <dd> <label>Start Date:</label> {{ booking.start_date}}</dd>
+                  <dd> <label>End Date:</label> {{ booking.end_date }}</dd>
+                </dl>
+
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-md btn-outline-secondary" (click)="openCentered(editBooking)">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      
     </div>
     
   </div>

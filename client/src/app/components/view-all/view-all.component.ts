@@ -10,8 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ViewAllComponent implements OnInit {
 
   events: any; // to hold all the events from the db
-  booking: any;
-  result: any;
   showSpinner = true;  // shows the loader
 
   constructor(
@@ -30,6 +28,8 @@ export class ViewAllComponent implements OnInit {
     this.eventServ.getAllEvents().subscribe(data => {
       this.events = data['events'];
       this.showSpinner = false; // dont show spinner on success
+
+      console.log(this.events);
     });
   }
 

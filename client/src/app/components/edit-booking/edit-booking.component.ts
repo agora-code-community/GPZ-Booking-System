@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventServiceService } from '../../services/event-service.service';
 import { Router, Params ,ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-booking',
@@ -14,10 +15,13 @@ export class EditBookingComponent implements OnInit {
   bookings: any; // to hold the events booking
   id: string; // the event's ID
 
+  evntForm: FormGroup;
+
   constructor(
       private evntService: EventServiceService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private fb: FormBuilder
       ) { }
 
   ngOnInit() {
@@ -26,6 +30,10 @@ export class EditBookingComponent implements OnInit {
 
       // call getEvent()
       this.getEvent(this.id);
+
+      this.evntForm = this.fb.group({
+        name: this.evnt.name
+      });
   }
 
     /**
@@ -39,9 +47,9 @@ export class EditBookingComponent implements OnInit {
     });
   }
 
-  onSubmit(data) {
+  onSubmit() {
     // send to API
-    console.log(data);
+
       // this.evntService.updateEvent(this.id, data).subscribe(data => {
       //   if (data) {
       //       console.log('UPDATED SUCCESSFULLY'); // TODO: change to alert message
