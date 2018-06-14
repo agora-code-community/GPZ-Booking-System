@@ -60,7 +60,8 @@ class EventController extends Controller
     public function select(Event $event)
     {
         $response = [
-            'event' => $event
+            'event' => $event,
+            'bookings' => $event->bookings()->get()  // to get only 1 add ==> orderBy('created_at', 'desc')->first()o
         ];
 
         return response($response, 200);
@@ -85,5 +86,24 @@ class EventController extends Controller
         ];
 
         return response()->json($response, 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Event $event
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     * @internal param int $id
+     */
+    public function destroy(Event $event)
+    {
+        if(!$event)
+            throw new NotFoundHttpException;
+
+        if($event->delete())
+            return response()->json(null, 204);
+        else
+            return response()->json(['error' => 'Could not delete event'], 500);
     }
 }

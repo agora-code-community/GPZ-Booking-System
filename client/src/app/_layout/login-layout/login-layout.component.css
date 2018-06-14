@@ -1,4 +1,5 @@
 
 .bg {
-    background: linear-gradient(#614385, #516395);
+    background-image: url(/assets/blue-login.jpg);
+    height: 100vh;
 }
