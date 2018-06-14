@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FlashMessagesModule } from 'ngx-flash-messages';
 
 import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
@@ -18,6 +19,9 @@ import { BookFormComponent } from './components/book-form/book-form.component';
 import { EventServiceService } from './services/event-service.service';
 import { BookingServiceService } from './services/booking-service.service';
 import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
+import { ViewDetailsComponent } from './components/view-details/view-details.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { AddBookinComponent } from './components/add-bookin/add-bookin.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -39,7 +43,9 @@ const appRoutes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'view-booking', component: ViewAllComponent },
       { path: 'add-booking', component: BookFormComponent },
-        { path: 'edit-event/:id', component: EditBookingComponent },
+      { path: 'edit-event/:id', component: EditBookingComponent },
+      { path: 'view-details/:id', component: ViewDetailsComponent },
+      { path: 'new-bookin/:evnt_id', component: AddBookinComponent }
     ]
   }
 ]; // ends routes
@@ -55,7 +61,10 @@ const appRoutes: Routes = [
     ViewAllComponent,
     AppLayoutComponent,
     BookFormComponent,
-    EditBookingComponent
+    EditBookingComponent,
+    ViewDetailsComponent,
+    LoadingSpinnerComponent,
+    AddBookinComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +72,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FlashMessagesModule
   ],
   providers: [
     EventServiceService,
