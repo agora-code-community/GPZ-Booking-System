@@ -21,6 +21,7 @@ import { BookingServiceService } from './services/booking-service.service';
 import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
 import { ViewDetailsComponent } from './components/view-details/view-details.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { AddBookinComponent } from './components/add-bookin/add-bookin.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
       { path: 'view-booking', component: ViewAllComponent },
       { path: 'add-booking', component: BookFormComponent },
       { path: 'edit-event/:id', component: EditBookingComponent },
-      { path: 'view-details/:id', component: ViewDetailsComponent }
+      { path: 'view-details/:id', component: ViewDetailsComponent },
+      { path: 'new-bookin/:evnt_id', component: AddBookinComponent }
     ]
   }
 ]; // ends routes
@@ -61,7 +63,8 @@ const appRoutes: Routes = [
     BookFormComponent,
     EditBookingComponent,
     ViewDetailsComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AddBookinComponent
   ],
   imports: [
     BrowserModule,

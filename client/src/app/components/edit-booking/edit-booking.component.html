@@ -9,27 +9,25 @@
       <div class="card-body">
         <h4>Editing <small>Event name</small></h4>
         <hr>
-        <!-- if $evnt is retrieved from db, show form -->
-        <div *ngIf="evnt">
-          <form [formGroup]="evntForm" (ngSubmit)="onSubmit()">
-            <div class="col-md-8 mb-3">
-              <label for="event">Event Name</label>
-              <input type="text" class="form-control" id="event" formControlName="name" required>
-            </div>
-            <!-- <div class="col-md-8 mb-3">
-              <label for="descp">Event description</label>
-              <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
-            </div> -->
-            <p>This is all that can be edit so far</p>
+          <div *ngIf="evnt">
+            <form #evntForm="ngForm" (ngSubmit)="onSubmit(evntForm.value)">
+              <div class="col-md-8 mb-3">
+                <label for="evt">Event Name</label>
+                <input type="text" class="form-control" id="evt" name="name" [(ngModel)]="evnt.name" required>
+              </div>
+              <!-- <div class="col-md-8 mb-3">
+                <label for="descp">Event description</label>
+                <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
+              </div> -->
 
-            <a routerLink="/view-details/{{ evnt.id }}">View the bookings listed under this event?</a>
+              <a routerLink="/view-details/{{ evnt.id }}">View the bookings listed under this event?</a>
 
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary" [disabled]="evntForm.pristine">Update</button>
-            </div>
-          </form>
-        </div>
-
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" [disabled]="evntForm.pristine">Save</button>
+                <a routerLink="/view-booking" class="btn btn-secondary" style="margin-left: 16px">Back</a>
+              </div>
+            </form>
+          </div>    
       </div>
     </div>
   </div>

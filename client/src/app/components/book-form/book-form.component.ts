@@ -14,8 +14,8 @@ export class BookFormComponent implements OnInit {
   @ViewChild('t') t;  // selects the component eith the variale #t
   rooms: any;  // store the rooms from the db
   event: any; // full object of created event
-    formattedDate: string;
-    formattedTime: string;
+  formattedDate: string;
+  formattedTime: string;
 
   constructor(
     private bservice: BookingServiceService,
@@ -43,6 +43,14 @@ export class BookFormComponent implements OnInit {
     // console.log(evnt);
     this.evntService.storeEvent(evnt).subscribe(data => {
       this.event = data['event'];
+
+      // success message
+      if (data) {
+        this.flashMessagesService.show('Event created succussfully.', {
+          classes: ['alert', 'alert-success'],
+          timeout: 2500
+        });
+      }
     });
 
     this.t.select('details'); // selects the details tab after the posting
@@ -66,7 +74,7 @@ export class BookFormComponent implements OnInit {
         // on success
         if (booking) {
             // show success alert message
-            this.flashMessagesService.show('Added successfully', {
+            this.flashMessagesService.show('Booking has been successfully created', {
               classes: ['alert', 'alert-success'],
               timeout: 3000
             });

@@ -36,6 +36,7 @@
         </td>
         <td>Dates</td>
         <td>
+          <!-- Action buttons -->
           <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-sm btn-primary"> Edit</a> |
           <button type="button" (click)="open(content)" class="btn btn-sm btn-danger">Delete</button>
 
@@ -48,11 +49,11 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Are you sure you want to delete this event({{ evnt.id }}) permanently?</p>
+              <p>Are you sure you want to delete this event (ID: {{ evnt.id }}) permanently?</p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer">              
+              <button type="button"  class="btn btn-md btn-danger" (click)="deleteEvnt(evnt.id)">Yes</button>
               <button type="button" class="btn btn-md btn-secondary" (click)="c('Close click')">Cancel</button>
-              <button type="button"  class="btn btn-md btn-danger" (click)="deleteEvnt(evnt.id)">OK</button>
             </div>
           </ng-template>
         </td>
