@@ -22,6 +22,7 @@ import { EditBookingComponent } from './components/edit-booking/edit-booking.com
 import { ViewDetailsComponent } from './components/view-details/view-details.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { AddBookinComponent } from './components/add-bookin/add-bookin.component';
+import { UtilsService } from './services/utils.service';
 
 // routing links
 const appRoutes: Routes = [
@@ -77,7 +78,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     EventServiceService,
-    BookingServiceService
+    BookingServiceService,
+    UtilsService
   ],
   bootstrap: [AppComponent]
 })
