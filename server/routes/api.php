@@ -34,3 +34,8 @@ Route::group(['prefix' => 'bookings'], function () {
     Route::put('{booking}', 'BookingController@update');
     Route::delete('{booking}', 'BookingController@destroy');
 });
+
+Route::group(['prefix' => 'auth'], function(){
+    Route::post('login', 'Auth\\LoginController@login');
+    Route::post('register', 'Auth\\RegisterController@register');
+});
