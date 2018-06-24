@@ -1,0 +1,68 @@
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Add User</h1>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <div class="card col-10 offset-md-1 offset-lg-1">
+        <div class="card-body">
+          <h4>Create a new user of the system. Fill in all the fields</h4>
+          <form (ngSubmit)="onSubmit(signUp.value)" #signUp="ngForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="strt-date">First name:</label>
+                <div class="input-group">
+                  <input type="text" name="first_name" class="form-control"/>
+                </div>
+              </div>
+  
+              <div class="col-md-6 mb-3">
+                <label for="end-date">Last name:</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="last_name" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="strt-date">Username:</label>
+                <div class="input-group">
+                  <input type="text" name="username" class="form-control"/>
+                </div>
+              </div>
+  
+              <div class="col-md-6 mb-3">
+                <label for="email">Email:</label>
+                <div class="input-group">
+                  <input type="email" class="form-control" name="email" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="strt-date">Password:</label>
+                <div class="input-group">
+                  <input type="password" name="password" class="form-control"/>
+                </div>
+              </div>
+  
+              <div class="col-md-6 mb-3">
+                <label for="email">Retype Password:</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="c_password" required>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Add User</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

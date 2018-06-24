@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlashMessagesModule } from 'ngx-flash-messages';
+import { AuthGuard } from './Guards/authGuard';
 
 import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
@@ -23,6 +24,8 @@ import { ViewDetailsComponent } from './components/view-details/view-details.com
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { AddBookinComponent } from './components/add-bookin/add-bookin.component';
 import { UtilsService } from './services/utils.service';
+import { AuthServiceService } from './services/auth-service.service';
+import { SignupComponent } from './components/signup/signup.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -42,11 +45,12 @@ const appRoutes: Routes = [
     component: AppLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'view-booking', component: ViewAllComponent },
-      { path: 'add-booking', component: BookFormComponent },
-      { path: 'edit-event/:id', component: EditBookingComponent },
-      { path: 'view-details/:id', component: ViewDetailsComponent },
-      { path: 'new-bookin/:evnt_id', component: AddBookinComponent }
+      { path: 'view-booking', component: ViewAllComponent, canActivate: [AuthGuard] },
+      { path: 'add-booking', component: BookFormComponent, canActivate: [AuthGuard] },
+      { path: 'edit-event/:id', component: EditBookingComponent, canActivate: [AuthGuard] },
+      { path: 'view-details/:id', component: ViewDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] },
+      { path: 'register', component: SignupComponent }
     ]
   }
 ]; // ends routes
@@ -65,7 +69,8 @@ const appRoutes: Routes = [
     EditBookingComponent,
     ViewDetailsComponent,
     LoadingSpinnerComponent,
-    AddBookinComponent
+    AddBookinComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,9 @@ const appRoutes: Routes = [
   providers: [
     EventServiceService,
     BookingServiceService,
-    UtilsService
+    UtilsService,
+    AuthServiceService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
