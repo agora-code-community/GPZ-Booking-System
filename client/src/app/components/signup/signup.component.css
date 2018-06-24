@@ -1,0 +1,14 @@
+/* CSS specific to the signup component */
+
+.error {
+    color: red;
+    font-size: 0.7rem;
+}
+
+/* Styling for the load-spinner */
+app-loading-spinner {
+    width: 150px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
