@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -18,22 +18,25 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
+     * @return \Illuminate\Http\JsonResponse
      */
-    protected $redirectTo = '/home';
+    public function login(){
+        if(Auth::attempt([
+            'username' => request('username'),
+            'password' => request('password')
+        ])){
+            $user = Auth::user();
+            $success['token'] = $user->createToken('GPZ-Booking-System')->accessToken;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+            $response = [
+                'success' => $success
+            ];
+
+            return response()->json($response, 200);
+        }
+        else{
+            return response()->json(['error' => 'Incorrect credententials. Please check username or password.'], 401);
+        }
     }
 }
