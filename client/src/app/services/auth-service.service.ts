@@ -6,7 +6,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthServiceService {
 
   // server request variables
-  baseUrl = 'http://127.0.0.1:8000/api/auth';
+  baseUrl = 'https://agora-booking-system.herokuapp.com/users';
   contentHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'  // <- enables us to get validation messages from the API
@@ -14,6 +14,7 @@ export class AuthServiceService {
 
   authToken: any;
   username: string;
+
 
   constructor( private http: HttpClient) { }
 

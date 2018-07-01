@@ -5,14 +5,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class BookingServiceService {
 
   // variables
-  baseURL = 'http://127.0.0.1:8000/api/bookings/';
+  baseURL = 'https://agora-booking-system.herokuapp.com/api/bookings/';
+
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }
 
   // gets the rooms from the db
   getRooms() {
-    return this.http.get('http://127.0.0.1:8080/api/rooms/all');
+    return this.http.get('https://agora-booking-system.herokuapp.com/api/rooms/all');
   }
 
   /**
