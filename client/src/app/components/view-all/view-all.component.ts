@@ -31,7 +31,7 @@ export class ViewAllComponent implements OnInit {
       this.events = data['events'];
       this.showSpinner = false; // dont show spinner on success
 
-      console.log(this.events);
+      // console.log(this.events);
     });
   }
 

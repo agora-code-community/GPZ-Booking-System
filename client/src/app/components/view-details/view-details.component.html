@@ -48,10 +48,8 @@
         <div class="row">
           <div class="col-6" *ngFor="let booking of bookings">
 
-            <!-- Edit Modal & delete Modal section for specific bokinng -->
-            <!-- TODO: Add data from database into form -->
-            <!-- Delete modal for event -->     
-            <ng-template #editBooking let-c="close" let-d="dismiss">
+            <!-- Edit modal -->
+            <ng-template #editModal let-c="close" let-d="dismiss">
               <div class="modal-header">
                 <h4 class="modal-title">Edit Booking</h4>
                 <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -59,28 +57,33 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form #editFrom="ngForm" (ngSubmit)="onEditSumbit(editForm.value)">
+                <form (ngSubmit)="onBookingSubmit(bookForm.value)" #bookForm="ngForm">
+                  <div class="col-md-8 mb-3">
+                    <input type="text" class="form-control" name="id" [(ngModel)]="booking.id" hidden>
+                  </div>
+      
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="strt-date">Date of event (start):</label>
                       <div class="input-group">
-                        <input class="form-control" name="start_date" ngModel ngbDatepicker #d="ngbDatepicker" required>
+                        <input class="form-control"
+                                name="start_date" [(ngModel)]="startDate" ngbDatepicker #d="ngbDatepicker" required>
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                            <i class="fa fa-calendar"></i>
-                            <!-- <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/> -->
+                            <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
                           </button>
                         </div>
                       </div>
                     </div>
-        
+      
                     <div class="col-md-6 mb-3">
                       <label for="end-date">End date:</label>
                       <div class="input-group">
-                        <input class="form-control" name="end_date" ngModel ngbDatepicker #e="ngbDatepicker" required>
+                        <input class="form-control" name="end_date" 
+                              [(ngModel)]="endDate" ngbDatepicker #e="ngbDatepicker" required>
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
-                            <img src="../../../assets/icons/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                            <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
                           </button>
                         </div>
                       </div>
@@ -90,42 +93,42 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="strt">Start Time:</label>
-                      <ngb-timepicker name="start_time"></ngb-timepicker>
+                      <ngb-timepicker [(ngModel)]="startTime" name="start_time"></ngb-timepicker>
                       <!-- <input type="email" class="form-control" id="strt" ngModel name="strt_time" placeholder="10:00"> -->
                     </div>
               
                     <div class="col-md-6 mb-3">
                       <label for="end">End Time:</label>
-                      <<ngb-timepicker ngModel name="endt_time"></ngb-timepicker>
+                      <ngb-timepicker [(ngModel)]="endTime" name="end_time"></ngb-timepicker>
                       <!-- <input type="text" class="form-control" id="end" placeholder="12:00" ngModel name="emd_time" required> -->
                     </div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">
-                  <i class="fa fa-save"></i> Save</button>
+                <button type="button" class="btn btn-success" (click)="updateBk(bookForm.value)">Save</button>
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+              </div>
+            </ng-template>
+            <!-- ./ edit modal -->
+
+            <!-- Delete modal for event -->     
+            <ng-template #deleteBk let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Confirm Deletion</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this booking (ID: {{ booking.id }}) forever?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" (click)="deleteBookin( booking.id )">Yes</button>
+                <button type="button" class="btn btn-light" (click)="c('Close click')">Cancel</button>
               </div>
             </ng-template>
             <!-- ./delete modal code -->
-
-            <!-- Delete modal for event -->     
-        <ng-template #deleteBk let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">Confirm Deletion</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete this booking (ID: {{ booking.id }}) forever?</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-warning" (click)="deleteBookin( booking.id )">Yes</button>
-              <button type="button" class="btn btn-light" (click)="c('Close click')">Cancel</button>
-            </div>
-          </ng-template>
-    <!-- ./delete modal code -->
             <!-- ./ Modal section -->
 
             <!-- Inner bookings card -->
@@ -133,7 +136,7 @@
               <div class="card-header">
                 <h6>Booking Details</h6>
                 <div class="top-right">
-                  <button type="button" class="close" aria-label="Close" (click)="open(deleteBk)">
+                  <button type="button" class="close" aria-label="Close" (click)="openDelete(deleteBk)">
                     <span class="danger" aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -147,7 +150,7 @@
                 </dl>
 
                 <div class="d-flex justify-content-end">
-                  <button type="button" class="btn btn-md btn-outline-secondary" (click)="openCentered(editBooking)">
+                  <button type="button" class="btn btn-md btn-outline-primary" (click)="openEdit(editModal, booking)">
                     <i class="fa fa-edit"></i> Edit
                   </button>
                 </div>
