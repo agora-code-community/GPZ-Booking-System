@@ -11,10 +11,17 @@
   </button>
 
   <!-- Navbar links -->
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-    <ul class="navbar-nav">
+
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" [ngbCollapse]="!isCollapsed">
+    <ul class="navbar-nav" *ngIf="authService.loggedIn()">
+
       <li class="nav-item">
-        <a class="nav-link">Hi User</a>
+        <a class="nav-link"><i class="fa fa-user"></i> Hi <strong>{{ getUsername() }}</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="onLogout()">
+          <i class="fa fa-sign-out"></i> Sign out
+        </a>
       </li>
     </ul>
   </div>
