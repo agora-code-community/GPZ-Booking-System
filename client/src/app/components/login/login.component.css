@@ -35,3 +35,7 @@
     color: red;
     font-size: 0.7rem;
 }
+
+.btn:disabled {
+    cursor: not-allowed;
+}

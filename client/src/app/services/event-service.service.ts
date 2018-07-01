@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class EventServiceService {
 
-  baseURL = 'http://127.0.0.1:8080/api/events/';
+  baseURL = 'https://agora-booking-system.herokuapp.com/api/events/';
+  
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }

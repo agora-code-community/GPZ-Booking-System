@@ -4,6 +4,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FlashMessagesModule } from 'ngx-flash-messages';
+import { AuthGuard } from './Guards/authGuard';
 
 import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
@@ -18,6 +20,12 @@ import { BookFormComponent } from './components/book-form/book-form.component';
 import { EventServiceService } from './services/event-service.service';
 import { BookingServiceService } from './services/booking-service.service';
 import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
+import { ViewDetailsComponent } from './components/view-details/view-details.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { AddBookinComponent } from './components/add-bookin/add-bookin.component';
+import { UtilsService } from './services/utils.service';
+import { AuthServiceService } from './services/auth-service.service';
+import { SignupComponent } from './components/signup/signup.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -37,9 +45,12 @@ const appRoutes: Routes = [
     component: AppLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'view-booking', component: ViewAllComponent },
-      { path: 'add-booking', component: BookFormComponent },
-        { path: 'edit-event/:id', component: EditBookingComponent },
+      { path: 'view-booking', component: ViewAllComponent, /*canActivate: [AuthGuard]*/ },
+      { path: 'add-booking', component: BookFormComponent, /*canActivate: [AuthGuard]*/ },
+      { path: 'edit-event/:id', component: EditBookingComponent, /*canActivate: [AuthGuard]*/ },
+      { path: 'view-details/:id', component: ViewDetailsComponent, /*canActivate: [AuthGuard]*/ },
+      { path: 'new-bookin/:evnt_id', component: AddBookinComponent, /*canActivate: [AuthGuard]*/ },
+      { path: 'register', component: SignupComponent }
     ]
   }
 ]; // ends routes
@@ -55,7 +66,11 @@ const appRoutes: Routes = [
     ViewAllComponent,
     AppLayoutComponent,
     BookFormComponent,
-    EditBookingComponent
+    EditBookingComponent,
+    ViewDetailsComponent,
+    LoadingSpinnerComponent,
+    AddBookinComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -63,11 +78,15 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FlashMessagesModule
   ],
   providers: [
     EventServiceService,
-    BookingServiceService
+    BookingServiceService,
+    UtilsService,
+    AuthServiceService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
