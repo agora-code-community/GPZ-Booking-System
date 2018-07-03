@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable()
 export class BookingServiceService {
 
   // variables
+  authToken: string;
   baseURL = 'http://127.0.0.1:8000/api/bookings/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthServiceService
+  ) {}
 
   // gets the rooms from the db
   getRooms() {

@@ -58,6 +58,8 @@ export class ViewDetailsComponent implements OnInit {
 
    /**
    * Opens edit madal for a booking
+   * @param content is the template reference variable of the edit modal
+   * @param booking the details to be edited
    */
   openEdit(content, booking) {
     this.modalService.open(content, {size: 'lg'});
@@ -67,11 +69,12 @@ export class ViewDetailsComponent implements OnInit {
     this.startTime = this.utilService.reformatTime(booking.start_time);
     this.endTime = this.utilService.reformatTime(booking.end_time);
 
-    console.log(booking.start_date);
+    // console.log(booking.start_date);
   }
 
   /**
    * Opens delete modal for the bookings
+   * @param content the template reference variable of the delete modal
    */
   openDelete(content) {
     this.modalService.open(content);
