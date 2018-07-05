@@ -49,10 +49,11 @@ export class AuthServiceService {
 
   /**
    * Loads the token from localstorage
+   * @returns token from local storage
    */
   loadToken() {
     const token = localStorage.getItem('id_token');  // gets token from local storage
-    this.authToken = token;
+    return token;
   }
 
    /**

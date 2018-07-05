@@ -5,6 +5,7 @@ import { EventServiceService } from '../../services/event-service.service';
 import { BookingServiceService } from '../../services/booking-service.service';
 
 import { rooms } from '../../data-model';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-add-bookin',
@@ -22,6 +23,7 @@ export class AddBookinComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private flashMessages: FlashMessagesService,
+    private utilService: UtilsService,
     private bookinService: BookingServiceService
   ) { }
 
@@ -39,12 +41,12 @@ export class AddBookinComponent implements OnInit {
     data.event_id = this.id;
 
     // format dates for object to string
-    data.start_date = this.formatDate(data.start_date);
-    data.end_date = this.formatDate(data.end_date);
+    data.start_date = this.utilService.formatDate(data.start_date);
+    data.end_date = this.utilService.formatDate(data.end_date);
 
     // formatted times
-    data.start_time = this.formatTime(data.start_time);
-    data.end_time = this.formatTime(data.end_time);
+    data.start_time = this.utilService.formatTime(data.start_time);
+    data.end_time = this.utilService.formatTime(data.end_time);
 
       // sends to the api
     this.bookinService.storeBooking(data).subscribe(booking => {
@@ -67,28 +69,6 @@ export class AddBookinComponent implements OnInit {
     });
 
     // console.log(data); // <- for debug purposes
-  }
-
-  /**
-   * Changes the date format from object form -
-   * e.g {year: xxxx, month: xx, day: xx} to recommended -> yyyy/mm/dd
-   * @param date the date from the input form
-   */
-  formatDate(date): string {
-    const year = date.year;
-    const month = date.month;
-    const day = date.day;
-
-    return  this.formattedDate = year + '-' + month + '-' + day; // date yyyy-mm-dd
-  }
-
-  /**
-   * Format the time from the input form, from object-based {hours: xx, minutes: xx, seconds: xx}
-   * to recommended hours:minutes:seconds (h:m:s)
-   * @param time to be formatted as recommended
-   */
-  formatTime(time): string {
-    return this.formattedTime = time.hour + ':' + time.minute + ':' + time.second;
   }
 
 }
