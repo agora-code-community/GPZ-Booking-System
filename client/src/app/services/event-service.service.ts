@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable()
 export class EventServiceService {
 
   baseURL = 'https://agora-booking-system.herokuapp.com/api/events/';
-  
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthServiceService
+  ) { }
 
   /**
    * Get all the events
