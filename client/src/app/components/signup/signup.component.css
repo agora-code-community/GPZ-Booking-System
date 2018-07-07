@@ -1,5 +1,46 @@
 /* CSS specific to the signup component */
 
+.signup-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form-signup {
+    width: 100%;
+    max-width: 630px; /* must be 20px below the width of the card*/
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signup .form-control {
+    position: relative;
+    /* box-sizing: border-box; */
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signup label {
+    font-weight: 600;
+}
+
+.form-signup .form-control:focus {
+    z-index: 2;
+}
+
+.form-signup a {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#mid {
+    text-align: center;
+}
+
 .error {
     color: red;
     font-size: 0.7rem;
