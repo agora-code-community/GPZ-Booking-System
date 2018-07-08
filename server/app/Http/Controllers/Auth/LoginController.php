@@ -28,6 +28,7 @@ class LoginController extends Controller
         ])){
             $user = Auth::user();
             $success['token'] = $user->createToken('GPZ-Booking-System')->accessToken;
+            $success['username'] = $user->username;
 
             $response = [
                 'success' => $success

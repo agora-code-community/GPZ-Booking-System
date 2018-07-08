@@ -65,23 +65,23 @@ export class SignupComponent implements OnInit {
     this.authService.register(user).subscribe(
       data => {
         if (data) {
-          this.flashMessages.show('New user has been created successfully', {
+          this.flashMessages.show('New user has been created successfully, kindly sign in.', {
             classes: ['alert, alert-success'],
             timeout: 3000
           });
 
           this.showSpinner = false;  // don't show loader
 
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/');
         } else {
           this.showSpinner = true;
         }
       },
       err => {
-        // this.flashMessages.show(err.error.error, {
-        //   classes: ['alert, alert-warning'],
-        //   timeout: 3000
-        // });
+        this.flashMessages.show('Oops! An error occurred, please try again.', {
+          classes: ['alert, alert-warning'],
+          timeout: 3000
+        });
         console.log(err.error);
         this.resetForm();
       }
