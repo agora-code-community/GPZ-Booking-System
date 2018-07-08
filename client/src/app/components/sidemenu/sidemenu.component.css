@@ -1,5 +1,30 @@
 /* CSS specific to sidemenu */
 
+.clearfix {
+  padding-top: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px dotted grey;
+}
+
+.clearfix .avatar {
+  border: 1px solid grey;
+  border-radius: 50%;
+}
+
+.clearfix h5 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.dot {
+  vertical-align: text-top;
+  height: 8px;
+  width: 8px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -19,13 +44,17 @@
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   }
+
+  .sidebar .nav-item {
+    height: 45px;
+  }
   
   .sidebar .nav-link {
     font-weight: 500;
     color: #333;
   }
   
-  .sidebar .nav-link .feather {
+  .sidebar .nav-link .fa {
     margin-right: 4px;
     color: #999;
   }
@@ -35,11 +64,11 @@
   }
 
   .sidebar .nav-link:hover {
-    color: #999999;
+    color: #808080;
   }
 
-  .sidebar .nav-link:hover .feather,
-  .sidebar .nav-link.active .feather {
+  .sidebar .nav-link:hover .fa,
+  .sidebar .nav-link.active .fa {
     color: inherit;
   }
   

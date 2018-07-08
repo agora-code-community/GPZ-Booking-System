@@ -7,6 +7,7 @@ export class AuthServiceService {
 
   // server request variables
   baseUrl = 'https://agora-booking-system.herokuapp.com/users';
+  // baseUrl = 'http://127.0.0.1:8000/api/auth';
   contentHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'  // <- enables us to get validation messages from the API

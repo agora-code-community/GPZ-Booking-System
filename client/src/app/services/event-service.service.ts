@@ -6,6 +6,7 @@ import { AuthServiceService } from './auth-service.service';
 export class EventServiceService {
 
   baseURL = 'https://agora-booking-system.herokuapp.com/api/events/';
+  // baseURL = 'http://127.0.0.1:8000/api/events/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(
