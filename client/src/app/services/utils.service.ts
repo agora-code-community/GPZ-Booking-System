@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Houses general functions that are reusable in a number of components.
+ */
+
 @Injectable()
 export class UtilsService {
 

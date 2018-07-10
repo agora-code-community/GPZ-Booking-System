@@ -6,7 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { AuthGuard } from './Guards/authGuard';
+<<<<<<< HEAD
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+=======
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+>>>>>>> 151c6f568a9aa962011c050e6f63de428c474bc1
 
 import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
@@ -27,8 +31,12 @@ import { AddBookinComponent } from './components/add-bookin/add-bookin.component
 import { UtilsService } from './services/utils.service';
 import { AuthServiceService } from './services/auth-service.service';
 import { SignupComponent } from './components/signup/signup.component';
+<<<<<<< HEAD
 import { CalendarModule } from 'angular-calendar';
 import { CalendarComponent } from './components/calendar/calendar.component';
+=======
+import { InterceptorService } from './services/interceptor.service';
+>>>>>>> 151c6f568a9aa962011c050e6f63de428c474bc1
 
 // routing links
 const appRoutes: Routes = [
@@ -39,7 +47,8 @@ const appRoutes: Routes = [
     path: '',
     component: LoginLayoutComponent,
     children: [
-       { path: '', component: LoginComponent, pathMatch: 'full' }
+       { path: '', component: LoginComponent, pathMatch: 'full' },
+       { path: 'register', component: SignupComponent, pathMatch: 'full' }
     ]
   },
 
@@ -47,6 +56,7 @@ const appRoutes: Routes = [
     path: '',
     component: AppLayoutComponent,
     children: [
+<<<<<<< HEAD
       { path: 'dashboard', component: DashboardComponent },
       { path: 'view-booking', component: ViewAllComponent, /*canActivate: [AuthGuard]*/ },
       { path: 'add-booking', component: BookFormComponent, /*canActivate: [AuthGuard]*/ },
@@ -55,6 +65,14 @@ const appRoutes: Routes = [
       { path: 'view-details/:id', component: ViewDetailsComponent, /*canActivate: [AuthGuard]*/ },
       { path: 'new-bookin/:evnt_id', component: AddBookinComponent, /*canActivate: [AuthGuard]*/ },
       { path: 'register', component: SignupComponent }
+=======
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'view-booking', component: ViewAllComponent, canActivate: [AuthGuard] },
+      { path: 'add-booking', component: BookFormComponent, canActivate: [AuthGuard] },
+      { path: 'edit-event/:id', component: EditBookingComponent, canActivate: [AuthGuard] },
+      { path: 'view-details/:id', component: ViewDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] }
+>>>>>>> 151c6f568a9aa962011c050e6f63de428c474bc1
     ]
   }
 ]; // ends routes
@@ -93,7 +111,12 @@ const appRoutes: Routes = [
     BookingServiceService,
     UtilsService,
     AuthServiceService,
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
