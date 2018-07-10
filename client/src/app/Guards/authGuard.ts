@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.loggedIn()) {
       return true;
     } else {
-      this.flashMessages.show('Unauthorized!! You are not currently signed in in, Kindly sign in...', {
+      this.flashMessages.show('Unauthorized!! You are not currently signed in, Kindly sign in...', {
         classes: ['alert', 'alert-warning'],
         timeout: 3000
       });
