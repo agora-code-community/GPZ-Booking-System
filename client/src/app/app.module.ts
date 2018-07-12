@@ -38,7 +38,8 @@ const appRoutes: Routes = [
     path: '',
     component: LoginLayoutComponent,
     children: [
-       { path: '', component: LoginComponent, pathMatch: 'full' }
+       { path: '', component: LoginComponent, pathMatch: 'full' },
+       { path: 'register', component: SignupComponent, pathMatch: 'full' }
     ]
   },
 
@@ -46,13 +47,12 @@ const appRoutes: Routes = [
     path: '',
     component: AppLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'view-booking', component: ViewAllComponent, canActivate: [AuthGuard] },
       { path: 'add-booking', component: BookFormComponent, canActivate: [AuthGuard] },
       { path: 'edit-event/:id', component: EditBookingComponent, canActivate: [AuthGuard] },
       { path: 'view-details/:id', component: ViewDetailsComponent, canActivate: [AuthGuard] },
-      { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] },
-      { path: 'register', component: SignupComponent }
+      { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] }
     ]
   }
 ]; // ends routes

@@ -78,10 +78,10 @@ export class SignupComponent implements OnInit {
         }
       },
       err => {
-        // this.flashMessages.show(err.error.error, {
-        //   classes: ['alert, alert-warning'],
-        //   timeout: 3000
-        // });
+        this.flashMessages.show('Oops! An error occurred, please try again.', {
+          classes: ['alert, alert-warning'],
+          timeout: 3000
+        });
         console.log(err.error);
         this.resetForm();
       }
