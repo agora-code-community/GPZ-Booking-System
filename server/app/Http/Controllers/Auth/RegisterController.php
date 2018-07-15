@@ -37,7 +37,7 @@ class RegisterController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] = $user->createToken('GPZ-Booking-System')->accessToken;
+        $success['token'] = $user->createToken('agora-booking-system')->accessToken;
         $success['username'] = $user->username;
 
         $response = [
