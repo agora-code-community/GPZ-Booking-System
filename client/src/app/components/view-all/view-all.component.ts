@@ -40,7 +40,9 @@ export class ViewAllComponent implements OnInit {
    * @param content this is the template reference variable of the delete modal
    */
   open(content) {
-    this.modalService.open(content);
+    this.modalService.open(content).result.then((result) => {
+      console.log(result);
+    });
   }
 
   /**
