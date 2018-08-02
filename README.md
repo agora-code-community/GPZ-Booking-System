@@ -20,7 +20,7 @@ Server must run on URL http://127.0.0.1:8000 or else api calls wont work.
 
 This is where the angular frontend app is housed. 
 
-To get started run the command `nm install` to install dependencies
+To get started run the command `npm install` to install dependencies
 
 Once dependencies are installed app is ready to run by running command `ng serve -o`.
 This opens the browser to http://localhost:4200
