@@ -16,6 +16,7 @@ export class AddBookinComponent implements OnInit {
 
   // variables
   id: string;
+  rooms: any;
   formattedDate: string;  // change input date to one suited for db entry
   formattedTime: string;  // change input time to one suited for db entry
 
@@ -30,6 +31,18 @@ export class AddBookinComponent implements OnInit {
   ngOnInit() {
     // Get event id from url
     this.id = this.route.snapshot.params['evnt_id'];
+
+    // TODO: Cache rooms so we dont have to query the server all the time
+    this.getRooms();
+  }
+
+  getRooms() {
+    this.bookinService.getRooms().subscribe(
+      data => {
+        this.rooms = data['rooms'];
+      },
+      err => { console.log(err); }
+    );
   }
 
    /**

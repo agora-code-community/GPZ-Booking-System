@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventServiceService } from '../../services/event-service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FlashMessagesService } from 'ngx-flash-messages';
+import { EventEmitter } from '../../../../node_modules/protractor';
 
 @Component({
   selector: 'app-view-all',
@@ -42,6 +43,8 @@ export class ViewAllComponent implements OnInit {
   open(content) {
     this.modalService.open(content).result.then((result) => {
       console.log(result);
+      // call delete method here
+      this.deleteEvnt(result);
     });
   }
 
@@ -58,7 +61,9 @@ export class ViewAllComponent implements OnInit {
           classes: ['alert', 'alert-success'],
           timeout: 3000
         });
-        // TODO: update view without refreshing
+        // updates view
+        this.getEvents();
+
       } else {
         // error message
         this.flashmessages.show('Oops! Something went wrong, could not delete booking. Try again later.', {
