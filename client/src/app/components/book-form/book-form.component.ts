@@ -30,11 +30,11 @@ export class BookFormComponent implements OnInit {
     this.initRooms();
   }
 
-  // initialises the rooms from the DB
+  /**
+   * loads rooms t=from local storage
+   */
   initRooms() {
-    this.bservice.getRooms().subscribe( data => {
-      this.rooms = data['rooms'];
-    });
+    this.rooms = this.utilService.loadRooms();
   }
 
   /**

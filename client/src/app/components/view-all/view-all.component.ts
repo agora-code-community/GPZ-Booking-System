@@ -42,7 +42,7 @@ export class ViewAllComponent implements OnInit {
    */
   open(content) {
     this.modalService.open(content).result.then((result) => {
-      console.log(result);
+      // console.log(result);
       // call delete method here
       this.deleteEvnt(result);
     });

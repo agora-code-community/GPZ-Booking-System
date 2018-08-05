@@ -7,7 +7,7 @@ export class BookingServiceService {
 
   // variables
   // baseURL = 'https://agora-booking-system.herokuapp.com/api/bookings/';
-  baseURL = 'http://127.0.0.1:8000/api/bookings';
+  baseURL = 'http://127.0.0.1:8000/api/bookings/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(
@@ -45,14 +45,6 @@ export class BookingServiceService {
    */
   deleteBooking(booking_id) {
     return this.http.delete(this.baseURL + booking_id);
-  }
-
-   /**
-   * Stores rooms in local storage
-   * @param rooms is the username of the logged in person or robot. -\('~')/-
-   */
-  storeUserData(rooms) {
-    localStorage.setItem('rooms', rooms);
   }
 
 }

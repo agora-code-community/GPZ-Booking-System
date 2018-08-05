@@ -32,17 +32,14 @@ export class AddBookinComponent implements OnInit {
     // Get event id from url
     this.id = this.route.snapshot.params['evnt_id'];
 
-    // TODO: Cache rooms so we dont have to query the server all the time
     this.getRooms();
   }
 
+  /**
+   * Gets rooms from local storage
+   */
   getRooms() {
-    this.bookinService.getRooms().subscribe(
-      data => {
-        this.rooms = data['rooms'];
-      },
-      err => { console.log(err); }
-    );
+    this.rooms = this.utilService.loadRooms();
   }
 
    /**
