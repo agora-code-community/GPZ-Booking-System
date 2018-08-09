@@ -39,6 +39,10 @@
             <small class="error" *ngIf="!signUpFm.controls.username.valid && (signUpFm.controls.username.dirty || signUpFm.controls.username.touched)" >
               This field is required.
             </small>
+
+            <small class="error" *ngIf="usernameErr" >
+              This username is already take.
+            </small>
           </div>
       
           <div class="col-md-6 mb-3">
@@ -48,6 +52,10 @@
             </div>
             <small class="error" *ngIf="!signUpFm.controls.email.valid && (signUpFm.controls.email.dirty || signUpFm.controls.email.touched)" >
               Please enter a valid email address - john@doe.com.
+            </small>
+
+            <small class="error" *ngIf="emailErr" >
+              This address is in already in use.
             </small>
           </div>
         </div>

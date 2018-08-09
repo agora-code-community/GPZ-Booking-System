@@ -16,7 +16,6 @@ export class AuthServiceService {
   authToken: any;
   username: string;
 
-
   constructor( private http: HttpClient) { }
 
   /**

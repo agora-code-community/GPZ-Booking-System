@@ -14,6 +14,10 @@ export class SignupComponent implements OnInit {
   signUpFm: FormGroup;
   showSpinner = false;
 
+  // error variables
+  usernameErr = false;
+  emailErr = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthServiceService,
@@ -51,11 +55,11 @@ export class SignupComponent implements OnInit {
   }
 
   /**
-   * resets the form in cases of mistakes or server errors, but this should rarely
-   * be called because validation is synced with the API requirements
+   * Resets the password fields of the form in cases of mistakes or server errors,
+   * but this should rarely be called because validation is synced with the API requirements
    */
   resetForm() {
-    this.signUpFm.reset();
+    this.signUpFm.reset({password: '', c_password: ''});
   }
 
   /**
@@ -78,11 +82,23 @@ export class SignupComponent implements OnInit {
         }
       },
       err => {
+        err = err.error.error; // diasy chain to get to the error
+
+        // check if the username error from the server is present
+        if (err.username) {
+          this.usernameErr = true;
+        }
+        // checks whether the email error from the server is present
+        if (err.email) {
+          this.emailErr = true;
+        }
+
         this.flashMessages.show('Oops! An error occurred, please try again.', {
           classes: ['alert, alert-warning'],
           timeout: 3000
         });
-        console.log(err.error);
+
+        // console.log(err);
         this.resetForm();
       }
     );
