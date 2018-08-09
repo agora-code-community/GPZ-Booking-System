@@ -79,16 +79,16 @@
               </div>
             </div>
             
-            <!-- <div class="col-md-8 mb-3">
+            <div class="col-md-8 mb-3">
               <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
-              <select multiple class="custom-select d-block w-100" ngModel name="room" id="space" required>
-                <option *ngFor="let room of rooms">{{room.name}}</option>
-                <option>-- Choose --</option>
+              <select multiple class="custom-select d-block w-100" ngModel name="rooms" id="space" required>
+                <option *ngFor="let room of rooms" [value]="room.id">{{room.name}}</option>
+                <!-- <option>-- Choose --</option> -->
               </select>
-            </div> -->
+            </div>
 
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary" [disabled]="!event">Add Booking</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!event">Create Booking</button>
             </div>
           </form>
         </div>

@@ -54,4 +54,22 @@ export class UtilsService {
     return time ? { hour: parseInt(temp[0], 10), minute: parseInt(temp[1], 10), second: parseInt(temp[2], 10) } : null;
   }
 
+  /**
+   * Stores rooms in local storage
+   * @param rooms from the db
+   */
+  cacheRooms(rooms) {
+    localStorage.setItem('rooms', JSON.stringify(rooms));
+  }
+
+  /**
+   * Gets the rooms obj from local storage
+   * @returns rooms from local storage
+   */
+  loadRooms() {
+    const rooms = localStorage.getItem('rooms');
+
+    return JSON.parse(rooms);
+  }
+
 }
