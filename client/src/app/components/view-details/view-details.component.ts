@@ -77,7 +77,9 @@ export class ViewDetailsComponent implements OnInit {
    * @param content the template reference variable of the delete modal
    */
   openDelete(content) {
-    this.modalService.open(content);
+    this.modalService.open(content).result.then(
+      (result) => { this.deleteBookin(result); }
+    );
   }
 
   /**
@@ -125,6 +127,9 @@ export class ViewDetailsComponent implements OnInit {
           classes: ['alert', 'alert-success'],
           timeout: 3000
         });
+
+        // cheap solution to update the UI `\('-')/`
+        this.getEvent(this.id);
       } else {
          // Error alert message
          this.flashmessages.show('Oops! Something went wrong, could not delete booking. Try again later.', {

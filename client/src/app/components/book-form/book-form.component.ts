@@ -27,14 +27,14 @@ export class BookFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // his.initRooms();
+    this.initRooms();
   }
 
-  // initialises the rooms
+  /**
+   * loads rooms t=from local storage
+   */
   initRooms() {
-    this.bservice.getRooms().subscribe( data => {
-      this.rooms = data['rooms'];
-    });
+    this.rooms = this.utilService.loadRooms();
   }
 
   /**

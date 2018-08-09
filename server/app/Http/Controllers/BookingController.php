@@ -23,6 +23,7 @@ class BookingController extends Controller
             'start_date' => 'required | date',
             'end_date' => 'required | date',
             'event_id' => 'required|exists:events,id',
+            'rooms' => 'required|exists:rooms,id'
         ]);
 
         if($validator->fails()){
@@ -33,7 +34,7 @@ class BookingController extends Controller
 
         $booking = new Booking($input);
         $booking->save();
-        //$booking->rooms()->attach($rooms);
+        $booking->rooms()->attach($request->rooms);
 
         $response = [
             'booking' => $booking

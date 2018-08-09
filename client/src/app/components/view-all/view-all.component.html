@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
   <h1 class="h2">All Bookings</h1>
-  <div class="btn-toolbar mb-2 mb-md-0">
+  <!-- <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
       <button class="btn btn-sm btn-outline-secondary">Table</button>
       <button class="btn btn-sm btn-outline-secondary">Calendar</button>
@@ -9,7 +9,7 @@
       <span data-feather="calendar"></span>
       This Month
     </button>
-  </div>
+  </div> -->
 </div>
 
 <h5>All bookings</h5>
@@ -52,7 +52,7 @@
               <p>Are you sure you want to delete this event <em>(Name: {{ evnt.name }})</em> permanently?</p>
             </div>
             <div class="modal-footer">              
-              <button type="button"  class="btn btn-md btn-danger" (click)="deleteEvnt(evnt.id)">Yes</button>
+              <button type="button"  class="btn btn-md btn-danger" (click)="c(evnt.id)">Yes</button>
               <button type="button" class="btn btn-md btn-secondary" (click)="c('Close click')">Cancel</button>
             </div>
           </ng-template>
