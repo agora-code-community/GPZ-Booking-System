@@ -43,7 +43,13 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        // $events = Event::all();
+        
+        // query to retreive event and its bookings
+        $events = Event::with(['bookings' => function($query) {
+            $query->latest(); // orders the bookings in desc order(most rest first)
+        }])->orderBy('created_at', 'desc')->get();
+
         $response = [
             'events' => $events
         ];
