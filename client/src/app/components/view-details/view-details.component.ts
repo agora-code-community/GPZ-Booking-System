@@ -19,6 +19,7 @@ export class ViewDetailsComponent implements OnInit {
   evnt: any; // holds the event specific info
   bookings: any; // holds the booking info for a specific event
   showSpinner = true;
+  rooms: any;
 
   // form variables
   startDate: NgbDateStruct; // <- custom type acceptable for use in datepicker comp
@@ -40,6 +41,8 @@ export class ViewDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params['id']; // retrievs id from  the url
     // fetches data from db
     this.getEvent(this.id);
+
+    this.rooms = this.utilService.loadRooms(); // loads rooms
   }
 
    /**
