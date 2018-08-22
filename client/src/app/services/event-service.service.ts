@@ -10,8 +10,7 @@ export class EventServiceService {
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthServiceService
+    private http: HttpClient
   ) { }
 
   /**
