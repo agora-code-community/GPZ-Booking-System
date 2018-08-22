@@ -65,9 +65,10 @@ class EventController extends Controller
      */
     public function select(Event $event)
     {
+    	$bookings = $event->bookings()->get();
         $response = [
             'event' => $event,
-            'bookings' => $event->bookings()->get()  // to get only 1 add ==> orderBy('created_at', 'desc')->first()o
+            'bookings' => $bookings->load('rooms:name') // gets a booking and its rooms
         ];
 
         return response($response, 200);
