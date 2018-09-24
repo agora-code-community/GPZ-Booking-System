@@ -27,10 +27,12 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { AddBookinComponent } from './components/add-bookin/add-bookin.component';
 import { UtilsService } from './services/utils.service';
 import { AuthServiceService } from './services/auth-service.service';
+import { RoomsService } from './services/rooms.service';
 import { SignupComponent } from './components/signup/signup.component';
 import { CalendarModule } from 'angular-calendar';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { InterceptorService } from './services/interceptor.service';
+import { RoomsComponent } from './components/rooms/rooms.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
       { path: 'edit-event/:id', component: EditBookingComponent, canActivate: [AuthGuard] },
       { path: 'view-details/:id', component: ViewDetailsComponent, canActivate: [AuthGuard] },
       { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] },
+      { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
       { path: 'register', component: SignupComponent }
     ]
   }
@@ -79,7 +82,8 @@ const appRoutes: Routes = [
     LoadingSpinnerComponent,
     AddBookinComponent,
     SignupComponent,
-    CalendarComponent
+    CalendarComponent,
+    RoomsComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +102,7 @@ const appRoutes: Routes = [
     UtilsService,
     AuthServiceService,
     AuthGuard,
+    RoomsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

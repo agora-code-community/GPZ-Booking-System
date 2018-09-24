@@ -103,6 +103,14 @@
                       <!-- <input type="text" class="form-control" id="end" placeholder="12:00" ngModel name="emd_time" required> -->
                     </div>
                   </div>
+
+                  <div class="col-md-8 mb-3">
+                    <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
+                    <select multiple class="custom-select d-block w-100" ngModel name="rooms" id="space" required>
+                      <option *ngFor="let room of rooms" [value]="room.id">{{room.name}}</option>
+                      <!-- <option>-- Choose --</option> -->
+                    </select>
+                  </div>
                 </form>
               </div>
               <div class="modal-footer">
@@ -147,6 +155,12 @@
                   <dd> <label>End time:</label> {{ booking.end_time }}</dd>
                   <dd> <label>Start Date:</label> {{ booking.start_date}}</dd>
                   <dd> <label>End Date:</label> {{ booking.end_date }}</dd>
+                  <dd> <!-- displays the rooms -->
+                    <label>Rooms Booked:</label>
+                    <ul *ngFor="let room of booking.rooms">
+                      <li>{{ room.name }}</li>
+                    </ul>
+                  </dd>
                 </dl>
 
                 <div class="d-flex justify-content-end">
