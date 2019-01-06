@@ -1,9 +1,6 @@
-import {  Component,
-  ChangeDetectionStrategy,
-  OnInit
-} from '@angular/core';
-
-import {  startOfDay,
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import {
+  startOfDay,
   endOfDay,
   subDays,
   addDays,
@@ -12,14 +9,13 @@ import {  startOfDay,
   isSameMonth,
   addHours
 } from 'date-fns';
+import { Subject } from 'rxjs/Subject';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 
-import { Subject } from 'rxjs';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
-
+/**
+ * Color indicators
+ */
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -38,31 +34,33 @@ const colors: any = {
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
-
+  styleUrls: ['./calendar.component.css'],
+  templateUrl: './calendar.component.html'
 })
+export class CalendarComponent {
+  @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-
-export class CalendarComponent implements OnInit {
-  
-
-  view: string = 'month';
+  view = 'month';
 
   viewDate: Date = new Date();
+
+  modalData: {
+    action: string;
+    event: CalendarEvent;
+  };
 
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        /* this.handleEvent('Edited', event); */
+        this.handleEvent('Edited', event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
-        /* this.handleEvent('Deleted', event); */
+        this.handleEvent('Deleted', event);
       }
     }
   ];
@@ -94,22 +92,17 @@ export class CalendarComponent implements OnInit {
       end: new Date(),
       title: 'A draggable and resizable event',
       color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
+      actions: this.actions
     }
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen = true;
 
-  constructor() {}
-  ngOnInit() {}
+  constructor(private modal: NgbModal) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
+      this.viewDate = date;
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
@@ -117,7 +110,6 @@ export class CalendarComponent implements OnInit {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
-        this.viewDate = date;
       }
     }
   }
@@ -129,7 +121,13 @@ export class CalendarComponent implements OnInit {
   }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
+    this.handleEvent('Dropped or resized', event);
     this.refresh.next();
+  }
+
+  handleEvent(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
@@ -137,12 +135,7 @@ export class CalendarComponent implements OnInit {
       title: 'New event',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
+      color: colors.red
     });
     this.refresh.next();
   }
