@@ -31,7 +31,15 @@
     z-index: 2;
 }
 
+#mid {
+    text-align: center;
+}
+
 .error {
     color: red;
     font-size: 0.7rem;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
 }

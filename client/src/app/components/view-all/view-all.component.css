@@ -1,0 +1,8 @@
+/* Styling specific to the view all component */
+
+app-loading-spinner {
+    width: 150px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}

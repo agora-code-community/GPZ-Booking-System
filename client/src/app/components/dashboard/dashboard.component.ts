@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingServiceService } from '../../services/booking-service.service';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private bookinService: BookingServiceService,
+    private utilService: UtilsService
+  ) { }
 
   ngOnInit() {
+    // caches rooms from db
+    this.bookinService.getRooms().subscribe(
+      data => {
+        this.utilService.cacheRooms(data['rooms']);
+      },
+      err => { console.log(err); }
+    );
   }
 
 }

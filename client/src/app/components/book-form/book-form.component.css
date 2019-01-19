@@ -2,3 +2,12 @@
 label {
     font-weight: bold;
 }
+
+.warning {
+    color: red;
+    font-weight: 500;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
