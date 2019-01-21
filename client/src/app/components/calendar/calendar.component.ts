@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import {
   startOfDay,
   endOfDay,
@@ -12,6 +12,7 @@ import {
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
+import { EventServiceService } from '../../services/event-service.service';
 
 /**
  * Color indicators
@@ -37,7 +38,7 @@ const colors: any = {
   styleUrls: ['./calendar.component.css'],
   templateUrl: './calendar.component.html'
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   view = 'month';
@@ -67,38 +68,43 @@ export class CalendarComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions
-    }
-  ];
+  events: CalendarEvent[] = []; // events array of CAlendarEvent
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(
+    private modal: NgbModal,
+    private eventService: EventServiceService
+    ) {}
+
+  ngOnInit() {
+    // Fetch the events from the DB
+    this.eventService.getAllEvents().subscribe(
+      data => {
+        const evnt = data['events'];
+
+        // foreach element in $evnt create a structured object and push it to $events array
+        evnt.forEach(element => {
+          const obj = {
+            start: this.toDate(element.bookings[0]['start_date']), // convert to javascript date
+            end: this.toDate(element.bookings[0]['end_date']),
+            title: element.name
+          };
+          this.events.push(obj); // pushs structured obj to events Array
+          // info.push(obj);
+        });
+
+        this.refresh.next();
+      },
+      // handle error
+      error => { console.error(error); }
+    );
+  }
+
+  // Converts a string date to JS Date Object
+  toDate(date) {
+    return new Date(date);
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -125,9 +131,10 @@ export class CalendarComponent {
     this.refresh.next();
   }
 
+  // Opens that event modal
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.modal.open(this.modalContent, { size: 'sm' });
   }
 
   addEvent(): void {

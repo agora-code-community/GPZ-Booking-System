@@ -27,7 +27,37 @@
         </div>
       </ng-template>
     </ngb-tab>
-    <!-- details tab -->
+    <!-- event tab -->
+    <ngb-tab title="Organization details">
+      <ng-template ngbTabContent>
+        <div class="border border-top-0 py-3 px-3">
+
+            <form>
+              <div class="col-md-8 mb-3">
+                <label for="evnt">Organization/Coordinater Name</label>
+                <input type="text" class="form-control" placeholder="" required>
+              </div>
+              <div class="col-md-8 mb-3">
+                <label for="evnt">Email</label>
+                <input type="text" class="form-control" required>
+              </div>
+              <div class="col-md-8 mb-3">
+                <label for="evnt">Phone number</label>  
+                <input type="text" class="form-control" placeholder=""  required>
+              </div>
+              <div class="col-md-8 mb-3">
+                <label for="descp">Description</label>
+                <textarea class="form-control" rows="3" required></textarea>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Save and Continue</button>
+              </div>
+            </form>
+
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <!-- Booking details tab -->
     <ngb-tab title="Booking details" id="details">
       <ng-template ngbTabContent>
         <div class="border border-top-0 py-3 px-3">

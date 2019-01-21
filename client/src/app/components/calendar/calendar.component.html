@@ -1,24 +1,25 @@
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
+    <h5 class="modal-title">Event Summary</h5>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
-    </div>
-    <div>
-      Event:
-      <pre>{{ modalData?.event | json }}</pre>
+      Quick summary <hr>
+      <dl>
+        <dd><b>Title:</b> {{ modalData?.event.title }}</dd>
+        <dd><b>Start date:</b> {{ modalData?.event.start | date:'mediumDAte'}}</dd>
+        <dd><b>End date:</b> {{ modalData?.event.end | date:'mediumDate'}}</dd>
+      </dl>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
   </div>
 </ng-template>
+<!-- End modal -->
 
 <div class="row text-center">
   <div class="col-md-4">
@@ -75,7 +76,7 @@
 </div>
 
 <br>
-
+<!-- Actual calendar module -->
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
