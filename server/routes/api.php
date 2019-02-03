@@ -33,6 +33,16 @@ Route::group(['prefix' => 'events'], function () {
     });
 });
 
+Route::group(['prefix' => 'organizations'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('all', 'OrganizationController@index');
+        Route::get('{organization}', 'OrganizationController@select');
+        Route::post('', 'OrganizationController@store');
+        Route::put('{organization}', 'OrganizationController@update');
+        Route::delete('{organization}', 'OrganizationController@destroy');
+    });
+});
+
 Route::group(['prefix' => 'bookings'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('', 'BookingController@store');
