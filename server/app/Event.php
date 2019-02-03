@@ -12,7 +12,8 @@ class Event extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'organization_id'
     ];
 
     /**
@@ -20,5 +21,12 @@ class Event extends Model
      */
     public function bookings(){
         return $this->hasMany('App\Booking');
+    }
+
+    /**
+     * Assign the event to an organization.
+     */
+    public function organization(){
+        return $this->belongsTo('App\Organization');
     }
 }
