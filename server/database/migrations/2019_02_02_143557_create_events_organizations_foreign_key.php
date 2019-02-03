@@ -14,7 +14,7 @@ class CreateEventsOrganizationsForeignKey extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->integer('organization_id')->unsigned();
+            $table->integer('organization_id')->unsigned()->nullable();
 
             $table->foreign('organization_id')
                 ->references('id')->on('organizations')
