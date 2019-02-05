@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use Illuminate\Http\Request;
+use App\Organization;
 use Validator;
+use Illuminate\Http\Request;
 
-class EventController extends Controller
+class OrganizationController extends Controller
 {
     /**
      * Store a newly created resource in storage.
@@ -18,7 +18,6 @@ class EventController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'organization_id' => 'required|exists:organizations,id'
         ]);
 
         if($validator->fails()){
@@ -27,11 +26,11 @@ class EventController extends Controller
 
         $input = $request->all();
 
-        $event = new Event($input);
-        $event->save();
+        $organization = new Organization($input);
+        $organization->save();
 
         $response = [
-            'event' => $event
+            'organization' => $organization
         ];
 
         return response()->json($response, 201);
@@ -45,14 +44,14 @@ class EventController extends Controller
     public function index()
     {
         // $events = Event::all();
-        
-        // query to retreive event and its bookings
-        $events = Event::with(['bookings' => function($query) {
-            $query->latest(); // orders the bookings in desc order(most rest first)
+
+        // query to retreive organization and its events
+        $organization = Organization::with(['events' => function($query) {
+            $query->latest(); // orders the events in desc order(most rest first)
         }])->orderBy('created_at', 'desc')->get();
 
         $response = [
-            'events' => $events
+            'organization' => $organization
         ];
         return response()->json($response, 200);
     }
@@ -60,16 +59,16 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Event $event
+     * @param Organization $organization
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function select(Event $event)
+    public function select(Organization $organization)
     {
-    	$bookings = $event->bookings()->get();
+        $events = $organization->events()->get();
         $response = [
-            'event' => $event,
-            'bookings' => $bookings->load('rooms:name') // gets a booking and its rooms
+            'organization' => $organization,
+            'events' => $events
         ];
 
         return response($response, 200);
@@ -79,18 +78,18 @@ class EventController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param Event $event
+     * @param Organization $organization
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Organization $organization)
     {
-        if(!$event)
+        if(!$organization)
             throw new NotFoundHttpException;
 
-        $event->update($request->all());
+        $organization->update($request->all());
         $response = [
-            'event' => $event
+            'event' => $organization
         ];
 
         return response()->json($response, 200);
@@ -99,19 +98,19 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Event $event
+     * @param Organization $organization
      * @return \Illuminate\Http\Response
      * @throws \Exception
      * @internal param int $id
      */
-    public function destroy(Event $event)
+    public function destroy(Organization $organization)
     {
-        if(!$event)
+        if(!$organization)
             throw new NotFoundHttpException;
 
-        if($event->delete())
+        if($organization->delete())
             return response()->json(null, 204);
         else
-            return response()->json(['error' => 'Could not delete event'], 500);
+            return response()->json(['error' => 'Could not delete organization'], 500);
     }
 }
