@@ -12,7 +12,10 @@ class Organization extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'email',
+        'phone_number',
+        'description'
     ];
 
     /**

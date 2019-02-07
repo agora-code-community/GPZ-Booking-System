@@ -21,6 +21,7 @@ import { BookFormComponent } from './components/book-form/book-form.component';
 
 import { EventServiceService } from './services/event-service.service';
 import { BookingServiceService } from './services/booking-service.service';
+import { OrganisationService } from './services/organisation.service';
 import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
 import { ViewDetailsComponent } from './components/view-details/view-details.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
       { path: 'view-details/:id', component: ViewDetailsComponent, canActivate: [AuthGuard] },
       { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] },
       { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
-      { path: 'register', component: SignupComponent }
+      { path: 'register', component: SignupComponent },
+      { path: 'calendar', component: CalendarComponent }
     ]
   }
 ]; // ends routes
@@ -103,6 +105,7 @@ const appRoutes: Routes = [
     AuthServiceService,
     AuthGuard,
     RoomsService,
+    OrganisationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
