@@ -10,8 +10,11 @@
 
     <div class="card" *ngIf="evnt">
       <div class="card-header">
-        {{ evnt.name }}
+        <h4>{{ evnt.name }}</h4>
         <div class="top-right">
+          <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-sm btn-outline-primary">
+            <i class="fa fa-edit"></i> Edit Event
+          </a> 
           <a routerLink="/new-bookin/{{ evnt.id }}" class="btn btn-sm btn-primary">
             <i class="fa fa-plus"></i> Add Booking
           </a>
@@ -22,28 +25,28 @@
         <!-- row 1 containing event specific details -->
         <div class="row">
           <div class="col">
-            <label class="col-sm col-md-3">Description :</label>
+            <!-- <label class="col-sm col-md-3">Description :</label>
             <p class="col-sm col-md-9">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis rem aut autem, ipsa odio incidunt necessitatibus, 
               ratione veritatis quod cumque optio recusandae architecto quo ab! Nulla eveniet doloremque culpa unde.
-            </p>
+            </p> -->
 
             <!-- control buttons -->
-            <div class="d-flex justify-content-end">
+            <!-- <div class="d-flex justify-content-end">
               <div class="btn-group">
                 <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-md btn-outline-primary">
                   <i class="fa fa-edit"></i> Edit
                 </a>
               </div>
-            </div>
+            </div> -->
 
             <!-- divider situation like this -->
             <hr>
-          </div> <!-- ./col -->
+          </div>
         </div>
 
         <!-- Row 2 containing booking cards -->
-        <p class="note">These are the bookings created under this event.</p>
+        <p class="note">Bookings under {{evnt.name}}.</p>
 
         <div class="row">
           <div class="col-6" *ngFor="let booking of bookings">

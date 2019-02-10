@@ -4,6 +4,7 @@ import { EventServiceService } from './../../services/event-service.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'ngx-flash-messages';
 import { UtilsService } from '../../services/utils.service';
+import { OrganisationService } from './../../services/organisation.service';
 
 @Component({
   selector: 'app-book-form',
@@ -15,12 +16,14 @@ export class BookFormComponent implements OnInit {
   @ViewChild('t') t;  // selects the component eith the variale #t
   rooms: any;  // store the rooms from the db
   event: any; // full object of created event
+  orgs: any; // full object of create organistation
   formattedDate: string;
   formattedTime: string;
 
   constructor(
     private bservice: BookingServiceService,
     private evntService: EventServiceService,
+    private orgService: OrganisationService,
     private flashMessagesService: FlashMessagesService,
     private utilService: UtilsService,
     private router: Router
@@ -28,6 +31,8 @@ export class BookFormComponent implements OnInit {
 
   ngOnInit() {
     this.initRooms();
+
+    this.getOrgs();
   }
 
   /**
@@ -38,24 +43,77 @@ export class BookFormComponent implements OnInit {
   }
 
   /**
+   * Gets all organization from the DB
+   */
+  getOrgs() {
+    // get orgs from db
+    this.orgService.getAllOrganizations().subscribe(
+      data => {
+        this.orgs = data['organization'];
+      },
+      error => { console.error(error); }
+    );
+  }
+
+  /**
+   * Stores an organisation data
+   * @param org the organisation form data
+   */
+  onOrgSubmit(org) {
+    // reconstruct object for posting
+    const req = {
+      'name': org.orgName,
+      'email': org.email,
+      'phone_number': org.phone,
+      'description': org.description
+    };
+
+    this.orgService.storeOrg(req).subscribe(
+      data => {
+        // success message
+        if (data) {
+          this.flashMessagesService.show('Organisation created succussfully.', {
+            classes: ['alert', 'alert-success'],
+            timeout: 2500
+          });
+        }
+
+        this.getOrgs();  // refetches the organisations from the db
+      },
+      error => { console.error(error); } // err handling (poor, I know)
+    );
+
+    this.t.select('Event'); // selects the event tab after posting
+  }
+
+  /**
    * Stores the event data first and moves to next tab
    * @param evnt the event data from the form
    */
   onEvntSubmit(evnt) {
     // console.log(evnt);
-    this.evntService.storeEvent(evnt).subscribe(data => {
-      this.event = data['event'];
+    this.evntService.storeEvent(evnt).subscribe(
+      data => {
+        this.event = data['event'];
 
-      // success message
-      if (data) {
-        this.flashMessagesService.show('Event created succussfully.', {
-          classes: ['alert', 'alert-success'],
+        // success message
+        if (data) {
+          this.flashMessagesService.show('Event created succussfully.', {
+            classes: ['alert', 'alert-success'],
+            timeout: 2500
+          });
+        }
+
+        this.t.select('details'); // selects the details tab after the posting
+      },
+      error => {
+        this.flashMessagesService.show('All fields are required. Please fill in everything.', {
+          classes: ['alert', 'alert-warning'],
           timeout: 2500
         });
+        console.log(error);
       }
-    });
-
-    this.t.select('details'); // selects the details tab after the posting
+    );
   }
 
   /**
