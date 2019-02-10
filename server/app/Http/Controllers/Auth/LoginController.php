@@ -27,7 +27,7 @@ class LoginController extends Controller
             'password' => request('password')
         ])){
             $user = Auth::user();
-            $success['token'] = $user->createToken('GPZ-Booking-System')->accessToken;
+            $success['token'] = $user->createToken('agora-booking-system')->accessToken;
             $success['username'] = $user->username;
 
             $response = [

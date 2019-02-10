@@ -53,7 +53,8 @@
 
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan migrate --force"
+            "php artisan migrate --force",
+            "php artisan passport:install"
         ]
     },
     "config": {

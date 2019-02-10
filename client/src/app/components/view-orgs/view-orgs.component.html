@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Organizations</h1>
+</div>
+
+<h5>Registered Organization</h5>
+<div class="table-responsive">
+  <table class="table table-striped mx-auto">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Organization</th>
+        <th>Contacts</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+    <tbody>
+      
+      <tr *ngFor="let org of orgs">
+        <td>{{i}}</td>
+        <td>
+          <a (click)="view(details)" aria-label="click to view"><span class="name">{{ org.name }}</span></a>
+
+          <!-- delete modal -->
+          <ng-template #details let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h5 class="modal-title">Organization details</h5>
+              <button type="button" class="close" aria-label="close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                <li>{{ org.name }}</li>
+                <li><a href="mailto:">{{ org.email }}</a></li>
+                <li>{{ org.phone_number }}</li>
+                <li>{{ org.description }}</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-md btn-secondary" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+        </td>
+        <td>
+          {{org.phone_number}} | <a href="mailto:">{{org.email}}</a>
+        </td>
+        <td>
+          <!-- Action buttons -->
+          <button type="button" (click)="openEdit(edit, org)" class="btn btn-sm btn-secondary"> Edit</button> |
+          <button type="button" (click)="open(content)" class="btn btn-sm btn-danger">Delete</button>
+
+          <!-- delete modal -->
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h5 class="modal-title">Confirm Deletion</h5>
+              <button type="button" class="close" aria-label="close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this Organization <em>(Name: {{org.name}})</em> permanently?</p>
+            </div>
+            <div class="modal-footer">              
+              <button type="button"  class="btn btn-md btn-danger" (click)="c(org.id)">Yes</button>
+              <button type="button" class="btn btn-md btn-secondary" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <!-- Edit org modal -->
+  <ng-template #edit let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit Organization Details</h5>
+      <button type="button" class="close" aria-label="close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #orgForm="ngForm">
+        <div class="col-md-8 mb-3">
+          <label for="evnt">Organization/Coordinater Name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="name" required>
+        </div>
+        <div class="col-md-8 mb-3">
+          <label for="evnt">Email</label>
+          <input type="text" class="form-control" name="email" [(ngModel)]="email" required>
+        </div>
+        <div class="col-md-8 mb-3">
+          <label for="evnt">Phone number</label>  
+          <input type="number" class="form-control" name="phone_number" [(ngModel)]="phone_number" required>
+        </div>
+        <div class="col-md-8 mb-3">
+          <label for="descp">Description</label>
+          <textarea class="form-control" rows="3" name="description" [(ngModel)]="description" required></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">              
+      <button type="button"  class="btn btn-md btn-success" (click)="c(orgForm.value)">Save</button>
+      <button type="button" class="btn btn-md btn-secondary" (click)="c()">Cancel</button>
+    </div>
+  </ng-template>
+
+</div>

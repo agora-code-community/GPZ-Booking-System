@@ -22,7 +22,8 @@
     right: 16px;
 }
 
-.note, label {
+.note {
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
