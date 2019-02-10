@@ -60,6 +60,7 @@ export class BookFormComponent implements OnInit {
    * @param org the organisation form data
    */
   onOrgSubmit(org) {
+    // reconstruct object for posting
     const req = {
       'name': org.orgName,
       'email': org.email,
@@ -77,13 +78,12 @@ export class BookFormComponent implements OnInit {
           });
         }
 
-        this.getOrgs();
+        this.getOrgs();  // refetches the organisations from the db
       },
       error => { console.error(error); } // err handling (poor, I know)
     );
 
     this.t.select('Event'); // selects the event tab after posting
-    console.log(req);
   }
 
   /**
@@ -92,19 +92,28 @@ export class BookFormComponent implements OnInit {
    */
   onEvntSubmit(evnt) {
     // console.log(evnt);
-    this.evntService.storeEvent(evnt).subscribe(data => {
-      this.event = data['event'];
+    this.evntService.storeEvent(evnt).subscribe(
+      data => {
+        this.event = data['event'];
 
-      // success message
-      if (data) {
-        this.flashMessagesService.show('Event created succussfully.', {
-          classes: ['alert', 'alert-success'],
+        // success message
+        if (data) {
+          this.flashMessagesService.show('Event created succussfully.', {
+            classes: ['alert', 'alert-success'],
+            timeout: 2500
+          });
+        }
+
+        this.t.select('details'); // selects the details tab after the posting
+      },
+      error => {
+        this.flashMessagesService.show('All fields are required. Please fill in everything.', {
+          classes: ['alert', 'alert-warning'],
           timeout: 2500
         });
+        console.log(error);
       }
-    });
-
-    this.t.select('details'); // selects the details tab after the posting
+    );
   }
 
   /**

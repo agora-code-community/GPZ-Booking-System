@@ -39,7 +39,7 @@ export class OrganisationService {
    * @param org_id orginzation id to be updated
    * @param data the updated input data
    */
-  updateEvent(org_id, data) {
+  updateOrg(org_id, data) {
     return this.http.put(this.baseURL + org_id, data, {headers: this.contentHeaders});
   }
 
@@ -47,7 +47,7 @@ export class OrganisationService {
    * Deletes an organization
    * @param org_id the organization's id
    */
-  deleteEvent(org_id) {
+  deleteOrg(org_id) {
     return this.http.delete(this.baseURL + org_id);
   }
 

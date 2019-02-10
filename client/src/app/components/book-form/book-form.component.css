@@ -11,3 +11,8 @@ label {
 button:disabled {
     cursor: not-allowed;
 }
+
+.error {
+    font-size: 0.8rem;
+    color: orangered;
+}

@@ -34,6 +34,7 @@ import { CalendarModule } from 'angular-calendar';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { InterceptorService } from './services/interceptor.service';
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { ViewOrgsComponent } from './components/view-orgs/view-orgs.component';
 
 // routing links
 const appRoutes: Routes = [
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
       { path: 'new-bookin/:evnt_id', component: AddBookinComponent, canActivate: [AuthGuard] },
       { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
       { path: 'register', component: SignupComponent },
-      { path: 'calendar', component: CalendarComponent }
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'view-orgs', component: ViewOrgsComponent }
     ]
   }
 ]; // ends routes
@@ -85,7 +87,8 @@ const appRoutes: Routes = [
     AddBookinComponent,
     SignupComponent,
     CalendarComponent,
-    RoomsComponent
+    RoomsComponent,
+    ViewOrgsComponent
   ],
   imports: [
     BrowserModule,

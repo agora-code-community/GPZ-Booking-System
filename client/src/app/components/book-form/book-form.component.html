@@ -51,10 +51,11 @@
               </div>
               <div class="col-md-8 mb-3">
                 <label for="space">Organisation</label>
-                <select class="custom-select d-block w-100" ngModel name="organization" required>
+                <select class="custom-select d-block w-100" ngModel name="organization_id" required>
                  <option *ngFor="let element of orgs" [value]="element.id">{{ element.name }}</option>
                   <!-- <option>-- Choose --</option> -->
                 </select>
+                <p class="error"><b>*NB:</b> If the organization is not on this list, please create in in the before moving on.</p>
               </div>
               <!-- <div class="col-md-8 mb-3">
                 <label for="descp">Event description</label>

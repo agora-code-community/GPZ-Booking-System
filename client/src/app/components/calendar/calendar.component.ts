@@ -68,9 +68,11 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = []; // events array of CAlendarEvent
+  info = [];
 
-  activeDayIsOpen = true;
+  events: CalendarEvent[] = this.info; // events array of CalendarEvent
+
+  activeDayIsOpen = false;
 
   constructor(
     private modal: NgbModal,
@@ -79,6 +81,12 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     // Fetch the events from the DB
+    this.fetchEvents();
+
+    this.events = this.info;
+  }
+
+  fetchEvents() {
     this.eventService.getAllEvents().subscribe(
       data => {
         const evnt = data['events'];
@@ -90,8 +98,7 @@ export class CalendarComponent implements OnInit {
             end: this.toDate(element.bookings[0]['end_date']),
             title: element.name
           };
-          this.events.push(obj); // pushs structured obj to events Array
-          // info.push(obj);
+          this.info.push(obj); // pushs structured obj to events Array
         });
 
         this.refresh.next();
