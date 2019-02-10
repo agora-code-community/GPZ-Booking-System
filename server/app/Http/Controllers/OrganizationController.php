@@ -18,9 +18,9 @@ class OrganizationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required | email',
             'phone_number'=> 'required',
-            'description' => 'required'
+            'description' => 'required | max:250'
         ]);
 
         if($validator->fails()){
