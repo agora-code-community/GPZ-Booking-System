@@ -68,7 +68,7 @@ export class RoomsComponent implements OnInit {
       }
     });
 
-    this.name = room.name; // inistializes the room name for edit
+    this.name = room.name; // initializes the room name for edit
   }
 
   /**

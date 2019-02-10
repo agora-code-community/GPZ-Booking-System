@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventServiceService } from '../../services/event-service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FlashMessagesService } from 'ngx-flash-messages';
-import { EventEmitter } from '../../../../node_modules/protractor';
 
 @Component({
   selector: 'app-view-all',
