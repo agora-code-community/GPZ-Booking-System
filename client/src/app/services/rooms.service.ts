@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class RoomsService {
 
-  // baseURL = 'https://agora-booking-system.herokuapp.com/api/rooms/';
-  baseURL = 'http://127.0.0.1:8000/api/rooms/';
+  baseURL = 'https://agora-booking-system.herokuapp.com/api/rooms/';
+  // baseURL = 'http://127.0.0.1:8000/api/rooms/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(
