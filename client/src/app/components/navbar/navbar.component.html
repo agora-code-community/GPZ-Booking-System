@@ -12,8 +12,8 @@
 
   <!-- Navbar links -->
 
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" [ngbCollapse]="!isCollapsed">
-    <ul class="navbar-nav" *ngIf="authService.loggedIn()">
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" >
+    <ul class="navbar-nav">
 
       <li class="nav-item">
         <a class="nav-link"><i class="fa fa-user"></i> Hi <strong>{{ getUsername() }}</strong></a>
