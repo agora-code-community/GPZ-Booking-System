@@ -14,9 +14,9 @@ class AddNoPeopleKitReqPaidToBookings extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->integer('number_of_people')->default(null);
-            $table->string('kitchen_requirements', 240)->default(null);
-            $table->boolean('paid')->default(null);
+            $table->integer('number_of_people')->nullable()->default(null);
+            $table->string('kitchen_requirements', 240)->nullable()->default(null);
+            $table->boolean('paid')->nullable()->default(null);
         });
     }
 
