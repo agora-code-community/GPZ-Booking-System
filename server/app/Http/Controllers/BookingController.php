@@ -25,8 +25,11 @@ class BookingController extends Controller
             'end_time' => 'required | after:start_time',
             'start_date' => 'required | date | before_or_equal:end_date',
             'end_date' => 'required | date | after_or_equal:start_date',
-            'event_id' => 'required|exists:events,id',
-            'rooms' => 'required|exists:rooms,id'
+            'event_id' => 'required | exists:events,id',
+            'rooms' => 'required | exists:rooms,id',
+            'number_of_people' => 'required | string',
+            'kitchen_requirements' => 'required | string',
+            'paid' => 'required | boolean'
         ]);
 
         if($validator->fails()){

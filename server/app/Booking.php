@@ -16,7 +16,10 @@ class Booking extends Model
         'end_time',
         'start_date',
         'end_date',
-        'event_id'
+        'event_id',
+        'number_of_people',
+        'kitchen_requirements',
+        'paid'
     ];
 
     /**
