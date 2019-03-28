@@ -6,8 +6,8 @@ import { AuthServiceService } from './auth-service.service';
 export class BookingServiceService {
 
   // variables
-  // baseURL = 'https://agora-booking-system.herokuapp.com/api/bookings/';
-  baseURL = 'http://127.0.0.1:8000/api/bookings/';
+  baseURL = 'https://agora-booking-system.herokuapp.com/api/bookings/';
+  // baseURL = 'http://127.0.0.1:8000/api/bookings/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(
@@ -18,8 +18,8 @@ export class BookingServiceService {
   // gets the rooms from the db
   // TODO: Cache rooms so we dont have to query the server all the time
   getRooms() {
-    return this.http.get('http://127.0.0.1:8000/api/rooms/all'); // for local
-    // return this.http.get('https://agora-booking-system.herokuapp.com/api/rooms/all'); // for production
+    // return this.http.get('http://127.0.0.1:8000/api/rooms/all'); // for local
+    return this.http.get('https://agora-booking-system.herokuapp.com/api/rooms/all'); // for production
   }
 
   /**
