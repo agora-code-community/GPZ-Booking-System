@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class OrganisationService {
 
-  baseURL = 'https://agora-booking-system.herokuapp.com/api/organizations/';
-  // baseURL = 'http://127.0.0.1:8000/api/organizations/';
+  // baseURL = 'https://agora-booking-system.herokuapp.com/api/organizations/';
+  baseURL = 'http://127.0.0.1:8000/api/organizations/';
   contentHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(

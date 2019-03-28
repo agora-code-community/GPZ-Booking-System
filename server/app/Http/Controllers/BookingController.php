@@ -27,7 +27,7 @@ class BookingController extends Controller
             'end_date' => 'required | date | after_or_equal:start_date',
             'event_id' => 'required | exists:events,id',
             'rooms' => 'required | exists:rooms,id',
-            'number_of_people' => 'required | string',
+            'number_of_people' => 'required | integer',
             'kitchen_requirements' => 'required | string',
             'paid' => 'required | boolean'
         ]);

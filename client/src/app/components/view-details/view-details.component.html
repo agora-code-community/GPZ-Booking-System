@@ -25,23 +25,16 @@
         <!-- row 1 containing event specific details -->
         <div class="row">
           <div class="col">
-            <!-- <label class="col-sm col-md-3">Description :</label>
+            <label class="col-sm col-md-4">Description :</label>
             <p class="col-sm col-md-9">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis rem aut autem, ipsa odio incidunt necessitatibus, 
-              ratione veritatis quod cumque optio recusandae architecto quo ab! Nulla eveniet doloremque culpa unde.
-            </p> -->
-
-            <!-- control buttons -->
-            <!-- <div class="d-flex justify-content-end">
-              <div class="btn-group">
-                <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-md btn-outline-primary">
-                  <i class="fa fa-edit"></i> Edit
-                </a>
-              </div>
-            </div> -->
+              {{ evnt.description }}
+            </p>
 
             <!-- divider situation like this -->
             <hr>
+          </div>
+          <div class="col">
+            <label class="col-sm col-md-4">Organization:</label> {{ org[0].name }}
           </div>
         </div>
 
@@ -107,12 +100,35 @@
                     </div>
                   </div>
 
-                  <div class="col-md-8 mb-3">
-                    <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
-                    <select multiple class="custom-select d-block w-100" ngModel name="rooms" id="space" required>
-                      <option *ngFor="let room of rooms" [value]="room.id">{{room.name}}</option>
-                      <!-- <option>-- Choose --</option> -->
-                    </select>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="people">Number of People attending:</label>
+                      <input type="number" class="form-control" id="people" name="number_of_people" [(ngModel)]="booking.number_of_people" required>
+                    </div>
+              
+                    <div class="col-md-6 mb-3">
+                      <label for="space">Room/Space booked: <small>Hold down <kbd>Ctrl</kbd> to select multiple</small></label>
+                      <select multiple class="custom-select d-block w-100" ngModel name="rooms" id="space" required>
+                        <option *ngFor="let room of rooms" [value]="room.id">{{room.name}}</option>
+                        <!-- <option>-- Choose --</option> -->
+                      </select>
+                    </div>
+                  </div>
+      
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="kitchen">Kitchen Requirements: <small>Anything needed from the kitchen</small></label>
+                      <textarea class="form-control" rows="3" id="kitchen" [(ngModel)]="booking.kitchen_requirements" name="kitchen_requirements" required></textarea>
+                    </div>
+              
+                    <div class="col-md-6 mb-3">
+                      <label for="space">Has Event been paid for:</label>
+                      <div>
+                        <label><input type="radio" [ngModel]="booking.paid" name="paid" value="true" required>Yes</label>
+                        <label><input type="radio" [ngModel]="booking.paid" name="paid" value="false" required>No</label>
+                      </div>
+                      
+                    </div>
                   </div>
                 </form>
               </div>
@@ -153,16 +169,30 @@
                 </div>
               </div>
               <div class="card-body">
-                <dl>
-                  <dd> <label>Start time:</label> {{ booking.start_time }}</dd>
-                  <dd> <label>End time:</label> {{ booking.end_time }}</dd>
-                  <dd> <label>Start Date:</label> {{ booking.start_date}}</dd>
-                  <dd> <label>End Date:</label> {{ booking.end_date }}</dd>
-                  <dd> <!-- displays the rooms -->
+                <table>
+                  <tr> 
+                    <td><label>Start time:</label> {{ booking.start_time }}</td>
+                    <td> <label>End time:</label> {{ booking.end_time }}</td>
+                  </tr>
+                  <tr>
+                    <td> <label>Start Date:</label> {{ booking.start_date}}</td>
+                    <td> <label>End Date:</label> {{ booking.end_date }}</td>
+                  </tr>
+                  <tr> 
+                    
+                  </tr>
+                </table> 
+                <dl> 
+                  <dd> <label>Number of people attending:</label> {{ booking.number_of_people }}</dd>
+                  <dd><!-- displays the rooms -->
                     <label>Rooms Booked:</label>
                     <ul *ngFor="let room of booking.rooms">
                       <li>{{ room.name }}</li>
                     </ul>
+                  </dd>
+                  <dd>
+                    <label>Kitchen Requirements:</label>
+                    {{ booking.kitchen_requirements }}
                   </dd>
                 </dl>
 

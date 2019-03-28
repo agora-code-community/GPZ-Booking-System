@@ -68,8 +68,10 @@ class EventController extends Controller
     public function select(Event $event)
     {
     	$bookings = $event->bookings()->get();
+        $organization = $event->organization()->get();
         $response = [
             'event' => $event,
+            'organization' => $organization,
             'bookings' => $bookings->load('rooms:name') // gets a booking and its rooms
         ];
 

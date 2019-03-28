@@ -15,10 +15,17 @@
                 <label for="evt">Event Name</label>
                 <input type="text" class="form-control" id="evt" name="name" [(ngModel)]="evnt.name" required>
               </div>
-              <!-- <div class="col-md-8 mb-3">
+              <div class="col-md-8 mb-3">
+                <label for="space">Organisation</label>
+                <select class="custom-select d-block w-100" ngModel name="organization_id" required>
+                  <option *ngFor="let element of orgs" [value]="element.id">{{ element.name }}</option>
+                  <!-- <option>-- Choose --</option> -->
+                </select>
+              </div>
+              <div class="col-md-8 mb-3">
                 <label for="descp">Event description</label>
-                <textarea class="form-control" rows="3" id="descp" ngModel name="description" required></textarea>
-              </div> -->
+                <textarea class="form-control" rows="3" id="descp" [(ngModel)]="evnt.description" name="description" required></textarea>
+              </div>
 
               <a routerLink="/view-details/{{ evnt.id }}">View the bookings listed under this event?</a>
 
