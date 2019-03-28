@@ -18,6 +18,7 @@ export class ViewDetailsComponent implements OnInit {
   id: number; // the event's ID #
   evnt: any; // holds the event specific info
   bookings: any; // holds the booking info for a specific event
+  org: any; // holds the organisation info for a booking
   showSpinner = true;
   rooms: any;
 
@@ -26,6 +27,9 @@ export class ViewDetailsComponent implements OnInit {
   endDate: NgbDateStruct;
   startTime: NgbTimeStruct; // <- custom type acceptable for use in timepicker comp
   endTime: NgbTimeStruct;
+  number_of_people: number;
+  Kitchen_requirements: string;
+  Paid: boolean;
 
   constructor(
     private eventServ: EventServiceService,
@@ -53,6 +57,7 @@ export class ViewDetailsComponent implements OnInit {
     this.eventServ.getAnEvent(id).subscribe(data => {
       this.evnt = data['event'];
       this.bookings = data['bookings'];
+      this.org = data['organization'];
 
       this.showSpinner = false;
       // console.log(this.evnt);

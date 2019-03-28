@@ -129,6 +129,8 @@ export class BookFormComponent implements OnInit {
     data.start_time = this.utilService.formatTime(data.start_time);
     data.end_time = this.utilService.formatTime(data.end_time);
 
+    data.paid = (data.paid === 'true') ? true : false;
+
     // sends to the api
     this.bservice.storeBooking(data).subscribe(booking => {
       // on success

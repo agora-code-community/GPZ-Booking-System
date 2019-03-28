@@ -3,6 +3,7 @@ import { EventServiceService } from '../../services/event-service.service';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlashMessagesService } from 'ngx-flash-messages';
+import { OrganisationService } from '../../services/organisation.service';
 
 @Component({
   selector: 'app-edit-booking',
@@ -14,10 +15,13 @@ export class EditBookingComponent implements OnInit {
   // variables
   evnt: any; // to hold the retrieved end
   bookings: any; // to hold the events booking
+  org: any;
+  orgs: Array<any>;
   id: string; // the event's ID
 
   constructor(
       private evntService: EventServiceService,
+      private orgService: OrganisationService,
       private route: ActivatedRoute,
       private router: Router,
       private flashMessagesService: FlashMessagesService
@@ -29,6 +33,7 @@ export class EditBookingComponent implements OnInit {
 
       // call getEvent()
       this.getEvent(this.id);
+      this.getOrgs();
   }
 
     /**
@@ -38,6 +43,13 @@ export class EditBookingComponent implements OnInit {
   getEvent(id) {
     this.evntService.getAnEvent(id).subscribe(data => {
       this.evnt = data['event'];
+      this.org = data['organization'];
+    });
+  }
+
+  getOrgs() {
+    this.orgService.getAllOrganizations().subscribe(data => {
+      this.orgs = data['organization'];
     });
   }
 

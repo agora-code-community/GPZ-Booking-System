@@ -20,6 +20,8 @@
         <th>#</th>
         <th>Event name</th>
         <th>Next event date</th>
+        <th>Kitchen Requirements</th>
+        <th>Paid</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -35,6 +37,8 @@
           <a routerLink="/view-details/{{ evnt.id }}"><span style="font-weight: 500">{{ evnt.name }}</span></a>
         </td>
         <td>{{ evnt.bookings[0].start_date | date: 'mediumDate' }}</td>
+        <td>{{ evnt.bookings[0].kitchen_requirements }}</td>
+        <td>{{ evnt.bookings[0].paid | paidOrNot}}</td>
         <td>
           <!-- Action buttons -->
           <a routerLink="/edit-event/{{ evnt.id }}" class="btn btn-sm btn-secondary"> Edit</a> |

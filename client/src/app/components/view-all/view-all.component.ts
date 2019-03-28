@@ -10,8 +10,9 @@ import { FlashMessagesService } from 'ngx-flash-messages';
 })
 export class ViewAllComponent implements OnInit {
 
-  events: any; // to hold all the events from the db
+  events: Array<any>; // to hold all the events from the db
   showSpinner = true;  // shows the loader
+  nothing = false;  // used to check if events are present
 
   constructor(
       private eventServ: EventServiceService,

@@ -12,8 +12,8 @@
 
   <!-- Navbar links -->
 
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" >
-    <ul class="navbar-nav">
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <ul class="navbar-nav" *ngIf="authService.loggedIn()">
 
       <li class="nav-item">
         <a class="nav-link"><i class="fa fa-user"></i> Hi <strong>{{ getUsername() }}</strong></a>
@@ -25,10 +25,4 @@
       </li>
     </ul>
   </div>
-  <!-- links
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
-    </li>
-  </ul> -->
 </nav>

@@ -34,3 +34,7 @@ app-loading-spinner {
     top: 50%;
     left: 40%;
 }
+
+label {
+    font-weight: 600;
+}

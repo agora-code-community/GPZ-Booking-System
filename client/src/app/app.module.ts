@@ -35,6 +35,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { InterceptorService } from './services/interceptor.service';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { ViewOrgsComponent } from './components/view-orgs/view-orgs.component';
+import { PaidOrNotPipe } from './_pipes/paid-or-not.pipe';
 
 // routing links
 const appRoutes: Routes = [
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     SignupComponent,
     CalendarComponent,
     RoomsComponent,
-    ViewOrgsComponent
+    ViewOrgsComponent,
+    PaidOrNotPipe
   ],
   imports: [
     BrowserModule,
